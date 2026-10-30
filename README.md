@@ -24,7 +24,7 @@ Develop an inventory management and replenishment recommendation system that hel
 
 ## 0. Mindmap
 
-![Inventory Management System radial functional mind map](./docs/images/functional-mindmap-radial.png)
+![Inventory Management System radial functional mind map](./docs/mind_map/functional-mindmap-radial.png)
 
 ## 1. Use Case Diagram
 
@@ -276,3 +276,11 @@ flowchart LR
 ## 5. Information Architecture
 
 Xem cấu trúc sitemap, phân cấp màn hình và điều hướng theo vai trò tại [Information Architecture](./INFORMATION_ARCHITECTURE.md).
+
+## 6. UI/UX
+
+[UI/UX Walkthrough](./docs/ui_ux/UI_UX_WALKTHROUGH.md) chứa thông tin UI/UX  giai đoạn sơ khai, để có thể hiểu hành trình từng vai trò, thao tác trên từng màn hình, phản hồi của hệ thống và những màn còn cần bổ sung.
+
+## 7. Database Design
+
+Xem [Database Design](./docs/database/DATABASE_DESIGN.md) để xem ER Diagram bằng Mermaid, các bảng, quan hệ và ràng buộc dữ liệu của MVP.
