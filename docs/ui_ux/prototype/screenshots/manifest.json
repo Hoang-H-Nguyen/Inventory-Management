@@ -1,0 +1,66 @@
+{
+  "viewport": "1440×1000 unless noted",
+  "fixtureDate": "2026-11-02",
+  "screenshots": [
+    {
+      "file": "01-dashboard.png",
+      "role": "manager",
+      "route": "dashboard",
+      "url": "http://127.0.0.1:4173/#dashboard"
+    },
+    {
+      "file": "02-inventory-staff.png",
+      "role": "staff",
+      "route": "inventory",
+      "url": "http://127.0.0.1:4173/#inventory"
+    },
+    {
+      "file": "04-receipt.png",
+      "role": "staff",
+      "route": "stock/SKU-001/receipt",
+      "url": "http://127.0.0.1:4173/#stock/SKU-001/receipt"
+    },
+    {
+      "file": "11-demand.png",
+      "role": "planner",
+      "route": "demand",
+      "url": "http://127.0.0.1:4173/#demand"
+    },
+    {
+      "file": "16-draft.png",
+      "role": "planner",
+      "route": "proposal/DX-042",
+      "url": "http://127.0.0.1:4173/#proposal/DX-042"
+    },
+    {
+      "file": "21-review.png",
+      "role": "manager",
+      "route": "proposal/DX-041",
+      "url": "http://127.0.0.1:4173/#proposal/DX-041"
+    },
+    {
+      "file": "26-catalog.png",
+      "role": "planner",
+      "route": "catalog",
+      "url": "http://127.0.0.1:4173/#catalog"
+    },
+    {
+      "file": "29-orders.png",
+      "role": "planner",
+      "route": "orders",
+      "url": "http://127.0.0.1:4173/#orders"
+    },
+    {
+      "file": "00-login.png",
+      "role": "public",
+      "route": "login",
+      "url": "http://127.0.0.1:4173/#login"
+    },
+    {
+      "file": "30-user-administration.png",
+      "role": "admin",
+      "route": "users",
+      "url": "http://127.0.0.1:4173/#users"
+    }
+  ]
+}

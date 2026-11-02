@@ -1,128 +1,206 @@
-# Stockwise — UI/UX Walkthrough
+# StockMate — UI/UX Walkthrough
 
-Stockwise giúp theo dõi tồn kho, đề xuất nhập thêm hàng và phê duyệt đề xuất. Tài liệu này giải thích các màn hình 00–20 theo từng vai trò. Nhấn vào tên màn hình trong bảng để xem ảnh.
+Tài liệu này mô tả prototype web hiện tại, được cập nhật theo [README](../../README.md), [Information Architecture](../information_architecture/INFORMATION_ARCHITECTURE.md) và [Business Rules](../BUSINESS_RULES.md), bao phủ US01–US14.
 
-## 1. Tổng quan
+Prototype StockMate hỗ trợ theo dõi Inventory Position, đề xuất nhiều sản phẩm/nhà cung cấp, ngân sách riêng, AI hỗ trợ bản nháp và các chứng từ outstanding. Tài liệu sử dụng 10 ảnh giao diện tiêu biểu chụp từ prototype.
 
-| Vai trò | Công việc chính |
+## 1. Mở và trải nghiệm
+
+Mở [prototype/index.html](./prototype/index.html) trực tiếp bằng trình duyệt. Không cần build hay thư viện frontend. Nếu trình duyệt không cho lưu localStorage qua file, chạy server từ thư mục repo:
+
+~~~sh
+node docs/ui_ux/prototype/serve.mjs
+~~~
+
+Mở **http://127.0.0.1:4173**. Xem [hướng dẫn chạy và kiểm tra](./prototype/README.md) để biết cấu trúc mã nguồn, cách đặt lại dữ liệu và chụp lại 10 ảnh.
+
+### Đăng nhập và đổi mật khẩu — US13
+
+![Đăng nhập StockMate](./prototype/screenshots/00-login.png)
+
+Màn hình đăng nhập giới thiệu ngắn gọn giá trị của StockMate: **Nắm chắc tồn kho. Chủ động nhập hàng.** Bố cục hai phần gồm giới thiệu ứng dụng và form đăng nhập với tên đăng nhập, mật khẩu, nút **Đăng nhập** cùng hướng dẫn liên hệ quản trị viên. Trên điện thoại, hai phần xếp dọc để dễ đọc và thao tác.
+
+Ảnh minh họa là trạng thái ban đầu: các ô nhập trống, không hiển thị tài khoản, mật khẩu mẫu hay nút điền sẵn. Thông tin dùng để kiểm tra prototype được ghi riêng trong [hướng dẫn kỹ thuật](./prototype/README.md#tài-khoản-và-đăng-nhập). Người dùng đăng nhập bằng tài khoản do quản trị viên cấp; tên và vai trò ở thanh trên phản ánh tài khoản hiện tại, không có bộ chọn vai trò.
+
+Tài khoản do Admin tạo hoặc cấp lại mật khẩu phải đổi mật khẩu tạm trước khi vào nghiệp vụ. Mật khẩu cần 8–128 ký tự; kiểm tra mật khẩu hiện tại, xác nhận khớp và mật khẩu mới khác mật khẩu hiện tại.
+
+Sai mật khẩu hoặc tài khoản bị khóa hiển thị lỗi chung. Username được chuẩn hóa chữ thường. **Đăng xuất** kết thúc phiên của tab; đổi mật khẩu, cấp lại mật khẩu, đổi vai trò hoặc khóa tài khoản làm các phiên trước đó hết hiệu lực. Đổi mật khẩu thành công giữ một phiên cho tab hiện tại. Có thể mở hai tab để thử thu hồi phiên.
+
+**Đặt lại mẫu** chỉ khôi phục dữ liệu nghiệp vụ; tài khoản và mật khẩu đã chỉnh được giữ nguyên.
+
+
+
+| Vai trò | Điều hướng và nhiệm vụ |
 |---|---|
-| Nhân viên kho (Staff) | Tra cứu và cập nhật số lượng tồn thực tế |
-| Người lập kế hoạch (Planner) | Phân tích nhu cầu, phát hiện thiếu hàng, tạo và theo dõi đề xuất |
-| Quản lý (Manager) | Xem tổng quan, phê duyệt hoặc từ chối đề xuất |
+| Admin | Quản trị tài khoản; tạo/sửa/khóa/mở khóa/cấp mật khẩu tạm |
+| Nhân viên kho | Tồn kho, Đơn đã đặt, Khách chờ hàng; nhận hàng, xuất bán/giao khách và kiểm kê |
+| Inventory Planner | Tồn kho, Phân tích nhu cầu, Cảnh báo bổ sung, Đề xuất, Sản phẩm & nhà cung cấp, Đơn đã đặt, Khách chờ hàng |
+| Quản lý | Tổng quan và Đề xuất; xem xét, phê duyệt hoặc từ chối |
 
-```mermaid
-flowchart LR
-    A["Cập nhật tồn kho"] --> B["Phân tích nhu cầu"]
-    B --> C["Cảnh báo thiếu hàng"]
-    C --> D["Tạo và gửi đề xuất"]
-    D --> E["Quản lý xem xét"]
-    E --> F["Phê duyệt hoặc từ chối"]
-```
+Luồng chính: **Theo dõi tồn kho → Phân tích nhu cầu → Xác định nhu cầu bổ sung → Chuẩn bị và gửi đề xuất → Quản lý quyết định**.
 
-[00 · UX handoff](<./00 · Getting started/UX handoff.png>) là trang hướng dẫn prototype. Các ảnh dùng dữ liệu minh họa.
+## 2. Nhân viên kho: theo dõi và ghi nhận tồn kho
 
-## 2. Nhân viên kho: cập nhật tồn
+### Tra cứu sản phẩm — US01
 
-**Luồng:** Tồn kho → Chi tiết sản phẩm → Nhập số lượng mới → Lưu → Thành công.
+Mở Tồn kho, tìm theo SKU hoặc tên, rồi chọn **Chi tiết**. Bảng hiển thị đơn vị, tồn hiện có, đang đặt, khách chờ và Inventory Position. Kết quả tìm kiếm rỗng có thông báo và nút xóa tìm kiếm.
 
-| Màn hình | Người dùng làm gì? | Kết quả |
+![Tồn kho — Nhân viên kho](./prototype/screenshots/02-inventory-staff.png)
+
+**Inventory Position = Hiện có + Đang đặt − Khách chờ hàng.** Chi tiết sản phẩm hiển thị các số thành phần, nhà cung cấp và lịch sử biến động theo người ghi nhận, thời gian và lý do.
+
+### Nhận hàng, xuất bán và kiểm kê — US02
+
+Từ chi tiết sản phẩm, chọn đúng nghiệp vụ. Ảnh dưới minh họa nhận hàng theo đơn đã đặt.
+
+![Nhận hàng theo đơn đã đặt](./prototype/screenshots/04-receipt.png)
+
+| Nghiệp vụ | Nhập liệu và kiểm tra | Kết quả |
 |---|---|---|
-| [02 · Inventory · Staff](<./02 · Inventory · Staff.png>) | Tìm theo SKU hoặc tên, chọn **Xem chi tiết** | Mở đúng sản phẩm cần kiểm tra |
-| [03 · Product detail · Staff](<./03 · Product detail · Staff.png>) | Xem tồn và đơn vị, chọn **Cập nhật số lượng** | Mở biểu mẫu cập nhật |
-| [04 · Update stock · Staff](<./04 · Update stock · Staff.png>) | Nhập tổng tồn mới, chọn **Lưu thay đổi**; hoặc **Hủy** | Lưu số mới hoặc rời biểu mẫu |
-| [05 · Update success · Staff](<./05 · Update success · Staff.png>) | Kiểm tra thông báo, chọn **Về danh sách tồn kho** | Biết số lượng đã đổi từ 60 thành 75 ram |
+| Nhận hàng | Chọn đơn của đúng SKU, nhập số thực nhận và lý do; không vượt phần chưa nhận | Tăng hiện có, giảm đang đặt cùng số lượng |
+| Bán trực tiếp | Nhập số thực giao và lý do; không vượt tồn hiện có | Giảm hiện có, ghi một lần bán |
+| Giao khách chờ | Chọn backorder, nhập số giao và lý do; không vượt tồn hoặc phần còn nợ | Giảm hiện có và backorder, chỉ ghi một lần bán |
+| Kiểm kê | Nhập tổng số đếm thực tế và lý do; cho phép tổng bằng 0 | Đặt tồn về tổng đã nhập, lưu chênh lệch qua lịch sử; không tạo doanh số |
 
-**Lưu ý:** nhập tổng tồn sau kiểm đếm. Nếu thực tế có 75 ram thì nhập `75`, không nhập phần chênh lệch `15`.
+Cho phép nhận/giao từng phần. Sau khi lưu, quay về chi tiết sản phẩm, hiển thị thông báo thành công và số tồn mới. Nhập sai giữ nguyên form và hiển thị lỗi để sửa.
 
-![05 · Update success · Staff](<./05 · Update success · Staff.png>)
+Ví dụ độc lập, bắt đầu từ dữ liệu mẫu: SKU-001 hiện có 60 ram, đơn PO-026 còn 40 ram. Nhận thêm 20 ram → hiện có 80, đơn còn 20. Không tự coi phần còn lại là đã nhận hoặc đã hủy.
 
-### Khi gặp vấn đề
+## 3. Planner: từ nhu cầu đến đề xuất
 
-| Màn hình | Tình huống | Cách tiếp tục |
-|---|---|---|
-| [19 · Validation states · Staff](<./19 · Validation states · Staff.png>) | Nhập `-5`; hệ thống báo chưa thể lưu | Chọn **Quay lại cập nhật**, nhập số nguyên ≥ 0 |
-| [20 · Empty search · Staff](<./20 · Empty search · Staff.png>) | Không có sản phẩm khớp từ khóa | Sửa từ khóa hoặc chọn **Xóa tìm kiếm** |
+### Phân tích nhu cầu — US03, US04
 
-## 3. Planner: tạo và theo dõi đề xuất
+Chọn sản phẩm và khoảng ngày để xem lịch sử bán. Bộ lọc lịch sử không thay đổi cửa sổ tính nhu cầu.
 
-**Luồng:** Tồn kho → Phân tích nhu cầu → Cảnh báo → Chi tiết cảnh báo → Tạo đề xuất → Gửi duyệt → Theo dõi.
+![Phân tích nhu cầu và lịch sử bán](./prototype/screenshots/11-demand.png)
 
-| Màn hình | Người dùng làm gì? | Kết quả |
-|---|---|---|
-| [06 · Inventory · Planner](<./06 · Inventory · Planner.png>) | So sánh tồn, nhu cầu/ngày và ROP; chọn **Phân tích SKU-001** | Nhận biết SKU cần kiểm tra |
-| [07 · Demand analysis · Planner](<./07 · Demand analysis · Planner.png>) | Chọn SKU, khoảng ngày, **Áp dụng**; xem lịch sử và biểu đồ | Hiểu mức tiêu thụ, rồi chọn **Xem cảnh báo SKU này** |
-| [08 · Low stock alerts · Planner](<./08 · Low stock alerts · Planner.png>) | Xem tồn, ROP và số ngày đủ dùng; mở chi tiết | Chọn sản phẩm cần bổ sung |
-| [09 · Low stock detail · Planner](<./09 · Low stock detail · Planner.png>) | Kiểm tra cơ sở tính, chọn **Tạo đề xuất nhập hàng** | Hiểu vì sao sản phẩm cần nhập thêm |
-| [10 · Proposal draft · Planner](<./10 · Proposal draft · Planner.png>) | Kiểm tra mức tồn mục tiêu và lượng nhập, chọn **Gửi phê duyệt** | Gửi đề xuất cho quản lý |
-| [12 · Proposal submitted · Planner](<./12 · Proposal submitted · Planner.png>) | Xem xác nhận gửi và tiến trình | Đề xuất có trạng thái **Chờ duyệt** |
-| [17 · Proposals · Planner](<./17 · Proposals · Planner.png>) | Lọc **Tất cả / Bản nháp / Chờ duyệt / Đã duyệt / Từ chối**, mở đề xuất | Theo dõi trạng thái các đề xuất |
+Ngày nghiệp vụ demo là **02/11/2026**. Nhu cầu dùng **03/10–01/11/2026**, tức 30 ngày lịch đã hoàn tất, không gồm hôm nay:
 
-### Ví dụ tính lượng nhập
+~~~text
+Nhu cầu trung bình/ngày = Tổng bán trong 30 ngày / 30
+ROP = Nhu cầu trung bình/ngày × Lead time + Tồn an toàn
+~~~
 
-Với SKU-001 trong ảnh:
+Lịch sử bao gồm giao backorder đúng một lần, loại trừ nhận hàng và kiểm kê. Chọn SKU-015 để thử thiếu dữ liệu: nhu cầu, ROP và khuyến nghị là **—**, có thông báo thiếu lịch sử; không coi thiếu dữ liệu là nhu cầu bằng 0.
 
-```text
-Nhu cầu/ngày = 600 ram ÷ 30 ngày = 20 ram/ngày
-ROP = Nhu cầu/ngày × Lead time + Safety stock
-    = 20 × 7 + 40 = 180 ram
+### Kiểm tra cảnh báo — US05
 
-Tồn hiện tại 60 < ROP 180 → Cần bổ sung
+Mở **Cảnh báo bổ sung**, chọn **Kiểm tra lại** hoặc mở cơ sở của từng SKU. Nhóm cần bổ sung chỉ gồm SKU có **Inventory Position ≤ ROP**; dữ liệu thiếu được tách riêng. Chi tiết cho thấy tồn hiện có, đang đặt, khách chờ, nhu cầu, lead time, an toàn và mục tiêu.
 
-Lượng nhập = max(0, Mức tồn mục tiêu − Tồn hiện tại − Hàng đang đặt)
-          = max(0, 500 − 60 − 100) = 340 ram
-```
+~~~text
+Ví dụ SKU-008 — Bút bi Thiên Long, đơn vị cây:
+Tổng bán 30 ngày = 150 → Nhu cầu = 150 / 30 = 5 cây/ngày
+ROP = 5 × 4 + 10 = 30 cây
+Position = 20 + 0 − 0 = 20 cây
+20 ≤ 30 → Cần bổ sung
+Gợi ý = max(0, 100 − 20) = 80 cây
+80 × 5.000 VND = 400.000 VND
+~~~
 
-Mức tồn mục tiêu 500 ram là giả định trong thiết kế, cần thống nhất theo chính sách doanh nghiệp.
+Chọn **Tạo bản nháp** để đưa sản phẩm sang đề xuất. Với dữ liệu thiếu, không tạo khuyến nghị giả.
 
-![12 · Proposal submitted · Planner](<./12 · Proposal submitted · Planner.png>)
+### Chuẩn bị bản nháp qua form hoặc AI — US06
 
-### Khi thiếu dữ liệu bán hàng
+Mở **Đề xuất nhập hàng → Tạo đề xuất**, hoặc bắt đầu từ cảnh báo. Bản nháp có thể chứa nhiều sản phẩm và nhiều nhà cung cấp. Planner thêm/xóa dòng, chọn nhà cung cấp cho từng sản phẩm, sửa số lượng và ngân sách.
 
-Ở [18 · Missing data · Planner](<./18 · Missing data · Planner.png>), hệ thống thông báo chưa đủ dữ liệu để tính nhu cầu và ROP, hiển thị dấu `—`. Người dùng chọn lại khoảng ngày hoặc sản phẩm có dữ liệu. **Không coi thiếu dữ liệu là nhu cầu bằng 0.**
+![Đề xuất nhiều sản phẩm, ngân sách và trợ lý bản nháp](./prototype/screenshots/16-draft.png)
 
-## 4. Manager: phê duyệt hoặc từ chối
-
-```mermaid
-flowchart TD
-    A["01 · Dashboard"] --> B["11 · Proposals"]
-    B --> C["13 · Review proposal"]
-    C -->|Phê duyệt| D["14 · Approved proposal"]
-    C -->|Từ chối| E["15 · Reject proposal"]
-    E -->|Xác nhận| F["16 · Rejected proposal"]
-    E -->|Quay lại| C
-```
-
-| Màn hình | Người dùng làm gì? | Kết quả |
-|---|---|---|
-| [01 · Dashboard · Manager](<./01 · Dashboard · Manager.png>) | Xem tổng SKU, SKU tồn thấp và đề xuất chờ duyệt; chọn **Xem đề xuất chờ duyệt** | Biết công việc cần xử lý |
-| [11 · Proposals · Manager](<./11 · Proposals · Manager.png>) | Lọc **Chờ duyệt / Đã duyệt / Từ chối**, chọn đề xuất | Mở đề xuất cần xem xét |
-| [13 · Review proposal · Manager](<./13 · Review proposal · Manager.png>) | Kiểm tra tồn, hàng đang đặt, mức mục tiêu, lượng đề xuất và người gửi | Chọn **Phê duyệt đề xuất** hoặc **Từ chối đề xuất** |
-| [14 · Approved proposal · Manager](<./14 · Approved proposal · Manager.png>) | Xem xác nhận, người duyệt và thời điểm | Trạng thái **Đã duyệt**; không còn thao tác duyệt/từ chối |
-| [15 · Reject proposal · Manager](<./15 · Reject proposal · Manager.png>) | Nhập lý do bắt buộc, chọn **Xác nhận từ chối**; hoặc **Quay lại** | Ghi nhận quyết định hoặc trở lại màn xem xét |
-| [16 · Rejected proposal · Manager](<./16 · Rejected proposal · Manager.png>) | Xem lý do, người xử lý và thời điểm | Trạng thái **Từ chối**; có nút về danh sách |
-
-![13 · Review proposal · Manager](<./13 · Review proposal · Manager.png>)
-
-**Phê duyệt chỉ ghi nhận đề xuất đã duyệt.** Tạo đơn mua hàng và tích hợp nhà cung cấp nằm ngoài MVP.
-
-## 5. Trạng thái và quy tắc cần nhớ
-
-| Trạng thái | Ý nghĩa |
+| Thành phần | Hành vi hiện tại |
 |---|---|
-| Bản nháp | Đề xuất đang được chuẩn bị, chưa gửi duyệt |
-| Chờ duyệt | Đã gửi, đang chờ quản lý quyết định |
-| Đã duyệt | Quản lý đã chấp thuận |
-| Từ chối | Quản lý không chấp thuận và đã ghi lý do |
+| Gợi ý số lượng | max(0, Mục tiêu − Inventory Position); tách khỏi số lượng Planner chọn |
+| Nhà cung cấp | Chọn trong các NCC liên kết với sản phẩm; cập nhật đơn giá dòng |
+| Thành tiền | Số lượng chọn × Đơn giá; tính lại khi thay đổi |
+| Ngân sách | Hạn mức riêng từng đề xuất; không có quỹ chung |
+| Vượt ngân sách | Hiển thị số vượt và vô hiệu hóa gửi; Planner sửa số lượng, xóa dòng hoặc tăng hạn mức |
+| Lưu bản nháp | Lưu cục bộ để xem lại; thay đổi hợp lệ cũng được lưu khi xác nhận trường |
+| Gửi phê duyệt | Chỉ Planner gửi Draft → Pending; yêu cầu có sản phẩm, số lượng nguyên dương và không vượt ngân sách |
+| Trợ lý AI mẫu | Giải thích hoặc đề nghị số lượng từ dữ liệu mẫu; Planner chọn áp dụng vào Draft |
+| AI lỗi | Nút mô phỏng lỗi hiển thị thông báo; form và việc lưu/gửi vẫn hoạt động |
 
-- Chỉ nhân viên kho cập nhật tồn; Planner lập đề xuất; Manager duyệt hoặc từ chối.
-- Số lượng tồn phải là số nguyên ≥ 0; lượng nhập khuyến nghị không âm.
-- Đề xuất đã xử lý không được duyệt hoặc từ chối lại.
-- Sidebar cho biết khu vực hiện tại; nút xanh là hành động chính. Thông báo dùng cả chữ và màu để giải thích kết quả.
+Bộ mẫu DX-042: giấy A4 210 ram × 60.000 = 12.600.000 VND, bút 80 cây × 5.000 = 400.000 VND. Tổng **13.000.000 VND**, ngân sách **14.000.000 VND**. Đổi ngân sách thành 10.000.000 để thử vượt 3.000.000; số lượng không tự giảm.
 
-## 6. Lưu ý về dữ liệu mẫu
+AI không gửi đề xuất, không duyệt và không ghi nhận kho/đơn hàng. Đây là phản hồi mô phỏng có nhãn, chưa gọi dịch vụ AI. Khi triển khai thật, AI phải sử dụng dữ liệu truy xuất và kết quả tính từ backend.
 
-- Luồng Staff cập nhật tồn từ 60 lên 75 ram; luồng Planner minh họa với tồn 60 ram. Trong hệ thống thật, các vai trò phải dùng dữ liệu đã cập nhật.
-- Ảnh 14 và 16 minh họa hai kết quả thay thế nhau của cùng đề xuất, không phải hai bước liên tiếp.
-- Ảnh 07 ghi đơn vị biểu đồ là “cái”, trong khi SKU-001 dùng “ram”; cần thống nhất khi triển khai.
+### Theo dõi và sao chép — US07, US09
 
-Tham khảo thêm: [Yêu cầu dự án](../../README.md) · [Information Architecture](../../INFORMATION_ARCHITECTURE.md).
+Danh sách có bộ lọc Draft/Pending/Approved/Rejected. Chi tiết lưu sản phẩm, nhà cung cấp, số lượng, giá, tổng tiền, ngân sách và lịch sử chỉnh sửa/quyết định.
+
+Sau khi gửi, vẫn ở chi tiết với trạng thái Chờ duyệt và nội dung chỉ đọc. Planner có thể mở DX-039 bị từ chối, chọn **Sao chép thành bản nháp**: bản mới liên kết về bản gốc, lấy lại dữ liệu/giá hiện tại và cho phép sửa. Bản gốc cùng lý do và lịch sử được giữ nguyên.
+
+## 4. Quản lý: theo dõi và quyết định
+
+### Dashboard — US10
+
+Dashboard hiển thị số SKU hoạt động, SKU cần bổ sung, đề xuất Pending và SKU thiếu dữ liệu. Các số lấy từ bộ dữ liệu trong trình duyệt, không dùng tổng giả lập ngoài danh mục.
+
+![Dashboard — Quản lý](./prototype/screenshots/01-dashboard.png)
+
+### Duyệt hoặc từ chối — US07, US08, US09
+
+Mở danh sách đề xuất, chọn DX-041 Chờ duyệt. Đọc các dòng sản phẩm/NCC, chi phí, ngân sách và lịch sử trước khi quyết định.
+
+![Chi tiết đề xuất chờ Quản lý quyết định](./prototype/screenshots/21-review.png)
+
+| Thao tác | Kết quả và phản hồi |
+|---|---|
+| Phê duyệt | Pending → Approved, lưu người và thời gian; ở lại chi tiết |
+| Từ chối | Mở hộp thoại; bắt buộc lý do không rỗng trước khi lưu Rejected |
+| Xem đề xuất đã xử lý | Hiển thị quyết định/lý do và lịch sử; không còn nút quyết định lần hai |
+| Xem Draft | Manager không có quyền xem bản nháp của Planner |
+
+**Phê duyệt chỉ ghi nhận quyết định.** Không tự tạo đơn mua, không tăng đang đặt hay hiện có. Planner ghi nhận riêng đơn đã thực sự đặt với NCC.
+
+## 5. Dữ liệu nền và phần chưa hoàn tất
+
+### Sản phẩm, nhà cung cấp và chính sách — US11
+
+![Danh mục sản phẩm, giá theo NCC và chính sách tồn](./prototype/screenshots/26-catalog.png)
+
+Planner thêm/chỉnh sản phẩm, đơn vị, lead time, tồn an toàn, mục tiêu; liên kết một hoặc nhiều NCC với đơn giá riêng. Form nhà cung cấp hỗ trợ thêm/chỉnh tên và liên hệ.
+
+Sản phẩm mới bắt đầu với hiện có 0 và trạng thái thiếu lịch sử bán. Giá/tên/đơn vị trong đề xuất đã lập là snapshot: sửa danh mục không sửa thông tin lịch sử của đề xuất. Bản sao từ đề xuất bị từ chối phải được kiểm tra lại trước khi gửi.
+
+### Đơn đã đặt và khách chờ hàng — US12
+
+![Theo dõi đơn đã đặt và phần chưa nhận](./prototype/screenshots/29-orders.png)
+
+| Vai trò | Đơn đã đặt | Khách chờ hàng |
+|---|---|---|
+| Planner | Ghi nhận SKU, NCC, số đã đặt thực tế, ngày và ghi chú | Ghi nhận SKU, khách hàng, số chưa đáp ứng, ngày và ghi chú |
+| Staff | Mở chứng từ để nhận từng phần | Mở chứng từ để giao từng phần |
+| Planner | Hủy số chưa nhận kèm lý do | Hủy số chưa giao kèm lý do |
+
+~~~text
+Đang đặt = Số đặt ban đầu − Đã nhận − Đã hủy
+Backorder = Số chờ ban đầu − Đã giao − Đã hủy
+~~~
+
+Chi tiết chứng từ lưu lịch sử. Hộp thoại hủy giới hạn số lượng trong phần outstanding và bắt buộc lý do. Hủy không thay đổi tồn hiện có.
+
+Ví dụ backorder độc lập: hiện có 60, khách chờ 10 ram → giao 6 → hiện có 54, khách chờ 4 → hủy 4 còn lại → hiện có vẫn 54, khách chờ 0.
+
+## 6. Admin: quản trị tài khoản — US14
+
+![Quản trị tài khoản](./prototype/screenshots/30-user-administration.png)
+
+Admin đăng nhập vào trang quản trị tài khoản, tìm theo username/họ tên và lọc theo vai trò hoặc trạng thái. Admin không mặc định có quyền kho, đề xuất hay phê duyệt.
+
+| Thao tác | Hành vi |
+|---|---|
+| Tạo tài khoản | Nhập username, họ tên, một vai trò và mật khẩu tạm; tài khoản bắt đầu hoạt động và phải đổi mật khẩu |
+| Sửa tài khoản | Cập nhật họ tên, vai trò và trạng thái; username không sửa |
+| Khóa / Mở khóa | Chọn trạng thái trong form chỉnh sửa; giữ ID và toàn bộ lịch sử nghiệp vụ |
+| Cấp mật khẩu tạm | Mở hộp thoại, nhập mật khẩu tạm; các phiên trước đó hết hiệu lực và lần đăng nhập tiếp phải đổi mật khẩu |
+| Xem hoạt động | Danh sách sự kiện có người thực hiện, tài khoản liên quan và thời điểm; không hiển thị mật khẩu |
+
+Username cần 3–32 ký tự gồm chữ Latin, số, dấu chấm, gạch dưới hoặc gạch ngang; kiểm tra trùng không phân biệt hoa/thường. Không đăng ký công khai, không gửi email đặt lại và không xóa cứng tài khoản.
+
+Admin không được tự khóa hoặc tự bỏ quyền Admin; hệ thống luôn giữ ít nhất một Admin hoạt động. Người tạo và lịch sử đề xuất lưu ID cùng tên tại thời điểm thực hiện. Đổi tên/vai trò hoặc khóa tài khoản không viết lại lịch sử. Planner chỉ xem/chỉnh/gửi bản nháp thuộc tài khoản của mình; các đề xuất đã gửi được xem theo quyền nghiệp vụ.
+
+## 7. Kiểm chứng và giới hạn prototype
+
+Kết quả kiểm tra nằm trong [verification.json](./prototype/verification.json); script tái chạy là [verify.mjs](./prototype/verify.mjs). Bộ kiểm tra bao gồm quyền theo vai trò trong UI, tìm kiếm, nhu cầu, dữ liệu thiếu, nhận/giao từng phần, kiểm kê, hủy outstanding, tính ngân sách, trạng thái đề xuất, snapshot giá, giữ bản bị từ chối và bố cục mobile.
+
+Prototype dùng HTML/CSS/JavaScript, localStorage cho dữ liệu và tài khoản, sessionStorage cho phiên theo tab. Đăng nhập, kiểm tra quyền và quản trị tài khoản được mô phỏng cục bộ; dữ liệu có thể bị chỉnh bằng công cụ trình duyệt. Chưa có backend xác thực, phân quyền bảo mật thực tế, đồng bộ nhiều người dùng hoặc tích hợp nhà cung cấp. Phép tính cục bộ chỉ minh họa nghiệp vụ; triển khai thật cần backend xác thực và tính toán. Nút kiểm tra cảnh báo hoạt động theo yêu cầu; lịch chạy hằng ngày chưa có.
+
+Ngày tính nhu cầu được cố định để tái lập ví dụ. Dấu thời gian thao tác được ghi bằng giờ thực tế theo Asia/Ho_Chi_Minh. Các ảnh là trạng thái độc lập được đặt lại fixture, không phải một chuỗi giao dịch liên tục; nên dùng **Đặt lại mẫu** trước khi thử từng ví dụ.
