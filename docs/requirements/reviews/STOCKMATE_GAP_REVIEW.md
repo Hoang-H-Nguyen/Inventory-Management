@@ -32,12 +32,12 @@ The project README and IA define US01–US14. Database design includes USERS and
 
 ## 5. Verification
 
-See [prototype verification](../ui_ux/prototype/verification.json) for browser results, including account lifecycle, session invalidation across tabs, draft ownership and inventory/proposal flows. The API validator checks references, role restrictions, safe account schemas, examples and YAML/JSON agreement.
+See [prototype verification](../../ui_ux/prototype/verification.json) for browser results, including account lifecycle, session invalidation across tabs, draft ownership and inventory/proposal flows. The API validator checks references, role restrictions, safe account schemas, examples and YAML/JSON agreement.
 
 ## 6. Remaining Implementation
 
 No backend is implemented. Browser authentication, storage and AI are demonstrations, not production security or services. Production work includes a database, server-side password verification and authorization, revocable sessions with expiry, login throttling, concurrency control, daily replenishment scheduling and actual AI integrations.
 
-The frontend stores password verifiers locally with PBKDF2 but remains editable by the browser user. The API specifies revocable tokens lasting up to eight hours; demo sessions last for the tab lifecycle. These limits are documented in the [prototype guide](../ui_ux/prototype/README.md).
+The frontend stores password verifiers locally with PBKDF2 but remains editable by the browser user. The API specifies revocable tokens lasting up to eight hours; demo sessions last for the tab lifecycle. These limits are documented in the [prototype guide](../../ui_ux/prototype/README.md).
 
-Sources: [Requirements](../../README.md) · [IA](../information_architecture/INFORMATION_ARCHITECTURE.md) · [Business Rules](../BUSINESS_RULES.md) · [API](../api/README.md).
+Sources: [Requirements](../../../README.md) · [IA](../../information_architecture/INFORMATION_ARCHITECTURE.md) · [Business Rules](../BUSINESS_RULES.md) · [API](../../openapi/README.md).

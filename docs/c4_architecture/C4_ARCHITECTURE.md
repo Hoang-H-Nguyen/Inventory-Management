@@ -2,9 +2,9 @@
 
 ## 1. Purpose and Status
 
-This document describes the proposed architecture supporting US01–US14 in the [project requirements](../../README.md). It uses C4 levels to describe the system boundary, runtime containers and backend responsibilities. Diagrams use Mermaid with explicit element types; they are architectural views, not deployment instructions.
+This document describes the proposed architecture supporting US01–US14 in the [project requirements](../../README.md). It covers C1 (System Context), C2 (Containers) and C3 (Components) to describe the system boundary, runtime containers and backend responsibilities. Diagrams use Mermaid with explicit element types; they are architectural views, not deployment instructions.
 
-The repository contains a working browser-local HTML/CSS/JavaScript prototype. The Backend API, relational database and external AI integration described below are **not implemented**. Backend language/framework, database engine, AI provider and hosting platform have not been selected.
+The repository contains a working browser-local HTML/CSS/JavaScript prototype. The Backend API, relational database and external AI integration described below are **not implemented**. The selected target stack is React with JavaScript and Vite for the frontend, Java with Spring Boot for the Backend API, and PostgreSQL for the relational database. The frontend communicates with the backend through a REST API using JSON over HTTPS. The selected AI provider is Google, accessed through the Gemini API using the Gemini model family. The exact model ID will be configured during implementation. The hosting platform has not been selected.
 
 The target is one warehouse, four user roles and a single modular Backend API. Components below are logical modules in that backend, not separately deployed microservices. Daily replenishment checks run as a backend task using the same calculation services as manual checks.
 
@@ -19,7 +19,7 @@ flowchart LR
     Planner["Person: Inventory Planner"]
     Manager["Person: Manager"]
     StockMate["Software System: StockMate<br/>Inventory and replenishment management"]
-    AI["External Software System: AI Service<br/>Generates draft assistance"]
+    AI["External Software System: Google Gemini API<br/>Gemini models for draft assistance"]
 
     Admin -->|"Manages accounts and access"| StockMate
     Staff -->|"Views stock; records receipts, sales and counts"| StockMate
@@ -35,25 +35,25 @@ flowchart LR
 | Warehouse Staff | Views inventory and outstanding records; records receipts, sales/backorder deliveries and physical counts. |
 | Inventory Planner | Maintains products/suppliers/prices/policies and outstanding records; analyzes demand; prepares, edits, submits and copies proposals. Drafts belong to their creator. |
 | Manager | Views submitted proposals and dashboard; approves/rejects Pending proposals with recorded decisions. |
-| AI Service | External generation capability called through the backend. It does not own calculations, permissions or business data. |
+| Google Gemini API | External generation capability from Google Gemini models, called through the backend. It does not own calculations, permissions or business data. |
 
 Automatic supplier integration, payments/accounting, shared budget funds and multiple warehouses are outside the MVP. Public registration and email-based password recovery are not included.
 
 ## 3. C2 — Containers
 
-In C4, a container is an application or data store; it does not imply Docker or any particular infrastructure technology.
+In C4, a container is an application or data store; it does not imply Docker or any particular infrastructure technology. Labels use `[Container: technology]` and `[Component: technology]` to identify element types and implementation technologies. `TBD` means a technology decision is still pending; it is not an implemented stack. C1 shows people and software systems without framework details.
 
 ```mermaid
 flowchart LR
     People["People<br/>Admin, Staff, Planner, Manager"]
-    AI["External System: AI Service<br/>Provider not selected"]
+    AI["Google Gemini API<br/>[External Software System]<br/>Google / Gemini models"]
 
     subgraph System["StockMate — Software System Boundary"]
-        Web["Container: Web Frontend<br/>Browser application<br/>Screens, forms and feedback"]
-        API["Container: Backend API<br/>Framework not selected<br/>Identity, business rules and backend tasks"]
-        DB[("Container: Relational Database<br/>Engine not selected<br/>Business data, sessions and audit")]
-        Web -->|"HTTPS / JSON; opaque bearer token<br/>API base path: /api/v1"| API
-        API -->|"Database queries and transactions"| DB
+        Web["Web Frontend<br/>[Container: React, JavaScript]<br/>Screens, forms and feedback"]
+        API["Backend API<br/>[Container: Java, Spring Boot]<br/>Identity, business rules and backend tasks"]
+        DB[("Relational Database<br/>[Container: PostgreSQL]<br/>Business data, sessions and audit")]
+        Web -->|"REST API / JSON over HTTPS; opaque bearer token<br/>API base path: /api/v1"| API
+        API -->|"SQL queries and PostgreSQL transactions"| DB
     end
 
     People -->|"Uses browser interface"| Web
@@ -61,11 +61,13 @@ flowchart LR
     AI -->|"Generated response or requested actions"| API
 ```
 
-| Container | Main responsibilities | Related design |
+| Container / technology | Main responsibilities | Related design |
 |---|---|---|
-| Web Frontend | Login, account administration and role-specific inventory/planning/review screens; collect inputs, display server results and explain errors. | [IA](../information_architecture/INFORMATION_ARCHITECTURE.md), [UI/UX walkthrough](../ui_ux/UI_UX_WALKTHROUGH.md) |
-| Backend API | Authenticate and authorize requests, calculate quantities/costs, enforce transitions and ownership, coordinate transactions, run daily/manual replenishment checks and mediate AI requests. | [API overview](../api/README.md), [OpenAPI YAML](../api/openapi.yaml), [OpenAPI JSON](../api/openapi.json) |
-| Relational Database | Store accounts, revocable sessions, product/supplier data, inventory, sales, outstanding quantities, proposal snapshots and activity history. | [Database design](../database/DATABASE_DESIGN.md) |
+| Web Frontend — React, JavaScript; Vite build tooling | Login, account administration and role-specific inventory/planning/review screens; collect inputs, display server results and explain errors. | [IA](../information_architecture/INFORMATION_ARCHITECTURE.md), [UI/UX walkthrough](../ui_ux/UI_UX_WALKTHROUGH.md) |
+| Backend API — Java, Spring Boot | Authenticate and authorize requests, calculate quantities/costs, enforce transitions and ownership, coordinate transactions, run daily/manual replenishment checks and mediate AI requests. | [API overview](../openapi/README.md), [OpenAPI YAML](../openapi/openapi.yaml), [OpenAPI JSON](../openapi/openapi.json) |
+| Relational Database — PostgreSQL | Store accounts, revocable sessions, product/supplier data, inventory, sales, outstanding quantities, proposal snapshots and activity history. | [Database design](../database/DATABASE_DESIGN.md) |
+
+The target frontend is a React application written in JavaScript, with Vite used for local development and production builds. Vite is build tooling, not a separate runtime container. The Backend API is a modular Java / Spring Boot application backed by PostgreSQL. Browser-to-backend communication follows the REST API contract at `/api/v1`, with JSON payloads over HTTPS. AI assistance uses Google Gemini models through the Gemini API. The exact model ID is configurable on the backend and will be selected during implementation. Hosting remains TBD; framework and database versions will be pinned during implementation.
 
 The database is reached by the backend, not directly by browsers or the AI service. Frontend arithmetic may provide feedback, but the backend calculates and validates authoritative results before saving or submitting changes.
 
@@ -77,21 +79,21 @@ The view below expands the Backend API container. Every client request enters th
 
 ```mermaid
 flowchart TB
-    Web["Container: Web Frontend"]
-    DB[("Container: Relational Database")]
-    AI["External System: AI Service"]
+    Web["Web Frontend<br/>[Container: React, JavaScript]"]
+    DB[("Relational Database<br/>[Container: PostgreSQL]")]
+    AI["Google Gemini API<br/>[External Software System]<br/>Google / Gemini models"]
 
-    subgraph Backend["Backend API — Container Boundary"]
-        Entry["Component: API Boundary<br/>Routing, validation and error responses"]
-        Auth["Component: Identity and Access<br/>Login, sessions, account management and authorization"]
-        Catalog["Component: Catalog and Policies<br/>Products, suppliers, prices and stock policies"]
-        Stock["Component: Inventory and Outstanding Records<br/>Receipts, sales, counts, orders and backorders"]
-        Demand["Component: Demand and Replenishment<br/>30-day demand, Position, ROP and suggestions"]
-        Task["Component: Replenishment Task<br/>Daily and manual check execution"]
-        Proposal["Component: Proposals and Decisions<br/>Owned drafts, budget, submission and review"]
-        Orchestrator["Component: AI Orchestration<br/>Allowed tools, context and draft-only actions"]
-        Dashboard["Component: Dashboard Queries<br/>Inventory and pending-review summaries"]
-        Audit["Component: Activity Recording<br/>Actor, target, reason and history snapshots"]
+    subgraph Backend["Backend API — Java / Spring Boot Container Boundary"]
+        Entry["API Boundary<br/>[Component: Java, Spring Boot]<br/>Routing, validation and error responses"]
+        Auth["Identity and Access<br/>[Component: Java, Spring Boot]<br/>Login, sessions, account management and authorization"]
+        Catalog["Catalog and Policies<br/>[Component: Java, Spring Boot]<br/>Products, suppliers, prices and stock policies"]
+        Stock["Inventory and Outstanding Records<br/>[Component: Java, Spring Boot]<br/>Receipts, sales, counts, orders and backorders"]
+        Demand["Demand and Replenishment<br/>[Component: Java, Spring Boot]<br/>30-day demand, Position, ROP and suggestions"]
+        Task["Replenishment Task<br/>[Component: Java, Spring Boot]<br/>Daily and manual check execution"]
+        Proposal["Proposals and Decisions<br/>[Component: Java, Spring Boot]<br/>Owned drafts, budget, submission and review"]
+        Orchestrator["AI Orchestration<br/>[Component: Java, Spring Boot]<br/>Allowed tools, context and draft-only actions"]
+        Dashboard["Dashboard Queries<br/>[Component: Java, Spring Boot]<br/>Inventory and pending-review summaries"]
+        Audit["Activity Recording<br/>[Component: Java, Spring Boot]<br/>Actor, target, reason and history snapshots"]
 
         Entry -->|"Authenticates and authorizes"| Auth
         Entry -->|"Authorized catalog operations"| Catalog
@@ -116,7 +118,7 @@ flowchart TB
         Proposal -->|"Records edits and decisions"| Audit
     end
 
-    Web -->|"HTTPS / JSON"| Entry
+    Web -->|"REST API / JSON over HTTPS"| Entry
     Orchestrator -->|"HTTPS: context and tool results"| AI
     AI -->|"Response or tool request; backend validates"| Orchestrator
     Auth -->|"Account and session persistence"| DB
@@ -136,108 +138,13 @@ flowchart TB
 | Demand and Replenishment | Uses the last 30 completed Asia/Saigon calendar days; distinguishes missing data from confirmed zero. Computes Position, ROP and suggested quantities using current inputs. Check-run metadata follows the existing API contract; its physical storage remains an implementation choice. |
 | Replenishment Task | Invokes the same checks daily or on Planner request. It does not create proposals or orders automatically. Exact scheduling and run coordination are implementation details. |
 | Proposals and Decisions | Maintains REPLENISHMENT_PROPOSALS and items, creator ownership, selected quantities, supplier prices, separate budget and submitted snapshots. Only Planner submits; only Manager decides. Copies preserve rejected originals. |
-| AI Orchestration | Retrieves permitted context, calls the external model and validates requested actions before invoking normal draft services. Handles failure with a form fallback; no direct database access by the model. |
+| AI Orchestration | Retrieves permitted context, calls the configured Google Gemini model through the Gemini API and validates requested actions before invoking normal draft services. Handles failure with a form fallback; no direct database access by the model. |
 | Dashboard Queries | Provides Manager totals for active SKUs, replenishment needs, missing data and Pending proposals. Does not grant Manager inventory-edit rights. |
 | Activity Recording | Writes ACTIVITY_LOG with actor/target IDs, historical name snapshots, time and reason. Business audit writes participate in the owning transaction; this is not a separate eventual-consistency service. |
 
-Arrows show logical calls or persistence access, not a requirement for separate services, queues or repository classes. A deployment view and physical module structure can be added when implementation technologies are selected.
+Arrows show logical calls or persistence access, not a requirement for separate services, queues or repository classes. All backend components are modules within the same Java / Spring Boot application. A deployment view and physical module structure can be added when hosting and implementation layout are defined.
 
-## 5. C4 — Code View and Existing Modules
-
-There is no implemented backend class model to document at C4 code level. Inventing backend classes or claiming the prototype is the target backend would misrepresent the repository. The existing source mapping is:
-
-| Existing module | Implemented responsibility |
-|---|---|
-| [index.html](../ui_ux/prototype/index.html) | Browser entry point and script/style loading. |
-| [styles.css](../ui_ux/prototype/styles.css) | Layout, visual presentation and responsive screens. |
-| [app.js](../ui_ux/prototype/app.js) | Sample business data, local calculations, routing, role-specific screens and workflow interactions. |
-| [auth.js](../ui_ux/prototype/auth.js) | Local account/session simulation, salted PBKDF2 password verifiers, account changes and per-tab session checks. |
-| [account-views.js](../ui_ux/prototype/account-views.js) | Login, password-change and Admin account-management views. |
-| [serve.mjs](../ui_ux/prototype/serve.mjs) | Optional static-file preview server; no business endpoints. |
-| [verify.mjs](../ui_ux/prototype/verify.mjs) | Browser workflow checks and representative screenshot capture. |
-
-Prototype modules are browser/UI code and verification support, not backend components. Browser storage and client-side checks do not supply production authentication or authorization. See the [prototype guide](../ui_ux/prototype/README.md) for execution instructions and limitations.
-
-## 6. Dynamic Views
-
-### 6.1. Login and Session Revocation
-
-This sequence describes the proposed backend contract. Tokens are opaque bearer tokens, not JWTs. AUTH_SESSIONS stores token hashes; raw passwords and tokens are not recorded in audit history.
-
-```mermaid
-sequenceDiagram
-    actor User
-    actor Admin
-    participant Web as Web Frontend
-    participant API as Backend API
-    participant Auth as Identity and Access
-    participant DB as Relational Database
-
-    User->>Web: Enter username and password
-    Web->>API: POST /auth/login over HTTPS
-    API->>Auth: Verify normalized username, active state and password
-    Auth->>DB: Read user; create session with token hash and auth_version
-    Auth-->>Web: Login response via API: token and safe user details
-    Note over Web,Auth: Temporary password restricts access to identity, logout and password change
-    Web->>API: Protected request with bearer token
-    API->>Auth: Check token, expiry, active state, auth_version and permission
-    Auth->>DB: Validate current session and account
-    Auth-->>API: Allow request or reject
-    Admin->>Web: Lock target account
-    Web->>API: PATCH /users/{userId} using Admin session
-    API->>Auth: Authorize Admin and validate account invariants
-    Auth->>DB: Atomically update active state and auth_version; invalidate target sessions; audit
-    User->>Web: Perform another action
-    Web->>API: Protected request using prior token
-    API->>Auth: Validate session again
-    Auth->>DB: Read current account/session state
-    Auth-->>Web: 401 via API; login required
-```
-
-Logout revokes the current session. Password reset/change and role/status changes invalidate previous target sessions. A successful password change returns one replacement session for the current client. Proposed tokens expire within eight hours; prototype sessions instead follow the tab lifecycle.
-
-### 6.2. AI-Assisted Draft, Submission and Review
-
-```mermaid
-sequenceDiagram
-    actor Planner
-    actor Manager
-    participant API as Backend API
-    participant AIFlow as AI Orchestration
-    participant Model as External AI Service
-    participant Demand as Demand and Replenishment
-    participant Proposal as Proposals and Decisions
-    participant DB as Relational Database
-
-    Planner->>API: Request help preparing or editing own Draft
-    API->>AIFlow: Authorized Planner request
-    AIFlow->>Demand: Retrieve permitted planning context and calculations
-    Demand-->>AIFlow: Current values or explicit missing-data result
-    AIFlow->>Model: Context and allowed draft-only tool interface
-    Model-->>AIFlow: Explanation or requested draft actions
-    AIFlow->>Proposal: Validate and execute permitted draft actions
-    Proposal->>Demand: Recalculate through shared business logic
-    Proposal->>DB: Save Draft and audit within transaction
-    API-->>Planner: Draft result and explanation
-    Note over Planner,API: Forms remain available if AI fails; over-budget drafts cannot be submitted
-    Planner->>API: Review and submit Draft with expected calculation fingerprint
-    API->>Proposal: Check creator, Draft state and current version
-    Proposal->>Demand: Recalculate current stock, policies, prices and demand
-    alt Inputs changed, missing data or over budget
-        Proposal-->>Planner: Conflict or validation response via API; remain Draft
-    else Reviewed calculation is valid
-        Proposal->>DB: Freeze snapshots, set Pending and record submission
-        Manager->>API: Approve or reject Pending proposal
-        API->>Proposal: Check Manager permission, Pending state and version
-        Proposal->>DB: Atomically save decision, reviewer, time and audit
-        Proposal-->>Manager: Decision via API; remain on detail
-    end
-    Note over Proposal,DB: Approval does not create a supplier order or change stock
-```
-
-AI actions use the same ownership, validation and calculation services as forms. AI cannot submit, approve/reject, edit catalog data or record stock/order changes. Selected quantities are not automatically reduced to satisfy a budget.
-
-## 7. Cross-Cutting Rules
+## 5. Cross-Cutting Rules
 
 | Concern | Architectural rule |
 |---|---|
@@ -251,11 +158,11 @@ AI actions use the same ownership, validation and calculation services as forms.
 | AI boundary and resilience | Expose only permitted draft actions and the minimum relevant planning context. The backend validates every requested action and uses authoritative calculations. Form workflows remain usable when AI is unavailable. |
 | Audit | Preserve actor/target IDs, historical display names, timestamps, reasons and decisions alongside successful changes. Credentials and raw tokens do not enter the audit log. |
 
-## 8. Related Documents
+## 6. Related Documents
 
 - [Project requirements and use cases](../../README.md)
 - [Information Architecture](../information_architecture/INFORMATION_ARCHITECTURE.md)
-- [Business Rules](../BUSINESS_RULES.md)
+- [Business Rules](../requirements/BUSINESS_RULES.md)
 - [Database Design](../database/DATABASE_DESIGN.md)
-- [API overview](../api/README.md), [OpenAPI YAML](../api/openapi.yaml), [OpenAPI JSON](../api/openapi.json)
+- [API overview](../openapi/README.md), [OpenAPI YAML](../openapi/openapi.yaml), [OpenAPI JSON](../openapi/openapi.json)
 - [UI/UX Walkthrough](../ui_ux/UI_UX_WALKTHROUGH.md) and [prototype guide](../ui_ux/prototype/README.md)

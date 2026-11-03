@@ -1,0 +1,1465 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "fixtureDate": "2026-11-02",
+  "total": 96,
+  "screenshots": [
+    {
+      "file": "common/01-login.png",
+      "id": "login",
+      "folder": "common",
+      "number": 1,
+      "role": "common",
+      "roles": [
+        "unauthenticated"
+      ],
+      "capturedRole": "public",
+      "title": "Đăng nhập",
+      "kind": "Màn hình",
+      "route": "login",
+      "sourceRoute": "login"
+    },
+    {
+      "file": "common/02-login-error.png",
+      "id": "login-error",
+      "folder": "common",
+      "number": 2,
+      "role": "common",
+      "roles": [
+        "unauthenticated"
+      ],
+      "capturedRole": "public",
+      "title": "Đăng nhập không thành công",
+      "kind": "Trạng thái",
+      "route": "login",
+      "sourceRoute": "login"
+    },
+    {
+      "file": "common/03-password.png",
+      "id": "password",
+      "folder": "common",
+      "number": 3,
+      "role": "common",
+      "roles": [
+        "admin",
+        "warehouse_staff",
+        "planner",
+        "manager"
+      ],
+      "capturedRole": "admin",
+      "title": "Đổi mật khẩu",
+      "kind": "Màn hình",
+      "route": "password",
+      "sourceRoute": "password"
+    },
+    {
+      "file": "common/04-temporary-password.png",
+      "id": "temporary-password",
+      "folder": "common",
+      "number": 4,
+      "role": "common",
+      "roles": [
+        "admin",
+        "warehouse_staff",
+        "planner",
+        "manager"
+      ],
+      "capturedRole": "admin",
+      "title": "Bắt buộc đổi mật khẩu tạm",
+      "kind": "Trạng thái",
+      "route": "password",
+      "sourceRoute": "password"
+    },
+    {
+      "file": "common/05-reset-data.png",
+      "id": "reset-data",
+      "folder": "common",
+      "number": 5,
+      "role": "common",
+      "roles": [
+        "admin",
+        "warehouse_staff",
+        "planner",
+        "manager"
+      ],
+      "capturedRole": "admin",
+      "title": "Xác nhận đặt lại dữ liệu mẫu",
+      "kind": "Hộp thoại",
+      "route": "users",
+      "sourceRoute": "users"
+    },
+    {
+      "file": "common/06-access-denied.png",
+      "id": "access-denied",
+      "folder": "common",
+      "number": 6,
+      "role": "common",
+      "roles": [
+        "admin",
+        "warehouse_staff",
+        "planner",
+        "manager"
+      ],
+      "capturedRole": "staff",
+      "title": "Chặn truy cập ngoài quyền",
+      "kind": "Chặn quyền",
+      "route": "users",
+      "sourceRoute": "users"
+    },
+    {
+      "file": "common/07-not-found.png",
+      "id": "not-found",
+      "folder": "common",
+      "number": 7,
+      "role": "common",
+      "roles": [
+        "admin",
+        "warehouse_staff",
+        "planner",
+        "manager"
+      ],
+      "capturedRole": "staff",
+      "title": "Nội dung không tồn tại",
+      "kind": "Trạng thái",
+      "route": "product/missing",
+      "sourceRoute": "product/missing"
+    },
+    {
+      "file": "admin/01-users.png",
+      "id": "users",
+      "folder": "admin",
+      "number": 1,
+      "role": "admin",
+      "roles": [
+        "admin"
+      ],
+      "capturedRole": "admin",
+      "title": "Danh sách tài khoản",
+      "kind": "Màn hình",
+      "route": "users",
+      "sourceRoute": "users"
+    },
+    {
+      "file": "admin/02-users-filter.png",
+      "id": "users-filter",
+      "folder": "admin",
+      "number": 2,
+      "role": "admin",
+      "roles": [
+        "admin"
+      ],
+      "capturedRole": "admin",
+      "title": "Lọc vai trò và trạng thái",
+      "kind": "Trạng thái",
+      "route": "users",
+      "sourceRoute": "users"
+    },
+    {
+      "file": "admin/03-users-empty.png",
+      "id": "users-empty",
+      "folder": "admin",
+      "number": 3,
+      "role": "admin",
+      "roles": [
+        "admin"
+      ],
+      "capturedRole": "admin",
+      "title": "Tìm tài khoản không có kết quả",
+      "kind": "Trạng thái",
+      "route": "users",
+      "sourceRoute": "users"
+    },
+    {
+      "file": "admin/04-user-new.png",
+      "id": "user-new",
+      "folder": "admin",
+      "number": 4,
+      "role": "admin",
+      "roles": [
+        "admin"
+      ],
+      "capturedRole": "admin",
+      "title": "Tạo tài khoản",
+      "kind": "Màn hình",
+      "route": "user/new",
+      "sourceRoute": "user/new"
+    },
+    {
+      "file": "admin/05-user-edit.png",
+      "id": "user-edit",
+      "folder": "admin",
+      "number": 5,
+      "role": "admin",
+      "roles": [
+        "admin"
+      ],
+      "capturedRole": "admin",
+      "title": "Chỉnh sửa / khóa / đổi vai trò",
+      "kind": "Màn hình",
+      "route": "user/u-planner",
+      "sourceRoute": "user/u-planner"
+    },
+    {
+      "file": "admin/06-user-self.png",
+      "id": "user-self",
+      "folder": "admin",
+      "number": 6,
+      "role": "admin",
+      "roles": [
+        "admin"
+      ],
+      "capturedRole": "admin",
+      "title": "Chỉnh sửa tài khoản của mình",
+      "kind": "Màn hình",
+      "route": "user/u-admin",
+      "sourceRoute": "user/u-admin"
+    },
+    {
+      "file": "admin/07-reset-password.png",
+      "id": "reset-password",
+      "folder": "admin",
+      "number": 7,
+      "role": "admin",
+      "roles": [
+        "admin"
+      ],
+      "capturedRole": "admin",
+      "title": "Cấp mật khẩu tạm",
+      "kind": "Hộp thoại",
+      "route": "user/u-planner",
+      "sourceRoute": "user/u-planner"
+    },
+    {
+      "file": "warehouse_staff/01-inventory.png",
+      "id": "inventory",
+      "folder": "warehouse_staff",
+      "number": 1,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Tồn kho",
+      "kind": "Màn hình",
+      "route": "inventory",
+      "sourceRoute": "inventory"
+    },
+    {
+      "file": "warehouse_staff/02-inventory-empty.png",
+      "id": "inventory-empty",
+      "folder": "warehouse_staff",
+      "number": 2,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Tìm sản phẩm không có kết quả",
+      "kind": "Trạng thái",
+      "route": "inventory",
+      "sourceRoute": "inventory"
+    },
+    {
+      "file": "warehouse_staff/03-product.png",
+      "id": "product",
+      "folder": "warehouse_staff",
+      "number": 3,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Chi tiết sản phẩm",
+      "kind": "Màn hình",
+      "route": "product/SKU-001",
+      "sourceRoute": "product/SKU-001"
+    },
+    {
+      "file": "warehouse_staff/04-product-no-history.png",
+      "id": "product-no-history",
+      "folder": "warehouse_staff",
+      "number": 4,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Sản phẩm chưa có biến động",
+      "kind": "Màn hình",
+      "route": "product/SKU-015",
+      "sourceRoute": "product/SKU-015"
+    },
+    {
+      "file": "warehouse_staff/05-receipt.png",
+      "id": "receipt",
+      "folder": "warehouse_staff",
+      "number": 5,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Nhận hàng",
+      "kind": "Màn hình",
+      "route": "stock/SKU-001/receipt",
+      "sourceRoute": "stock/SKU-001/receipt"
+    },
+    {
+      "file": "warehouse_staff/06-receipt-error.png",
+      "id": "receipt-error",
+      "folder": "warehouse_staff",
+      "number": 6,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Nhận vượt số còn lại",
+      "kind": "Trạng thái",
+      "route": "stock/SKU-001/receipt",
+      "sourceRoute": "stock/SKU-001/receipt"
+    },
+    {
+      "file": "warehouse_staff/07-receipt-success.png",
+      "id": "receipt-success",
+      "folder": "warehouse_staff",
+      "number": 7,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Nhận hàng — đã lưu",
+      "kind": "Kết quả",
+      "route": "product/SKU-001",
+      "sourceRoute": "stock/SKU-001/receipt"
+    },
+    {
+      "file": "warehouse_staff/08-sale.png",
+      "id": "sale",
+      "folder": "warehouse_staff",
+      "number": 8,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Xuất bán trực tiếp",
+      "kind": "Màn hình",
+      "route": "stock/SKU-001/sale",
+      "sourceRoute": "stock/SKU-001/sale"
+    },
+    {
+      "file": "warehouse_staff/09-backorder-delivery.png",
+      "id": "backorder-delivery",
+      "folder": "warehouse_staff",
+      "number": 9,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Giao khách chờ hàng",
+      "kind": "Màn hình",
+      "route": "stock/SKU-001/sale",
+      "sourceRoute": "stock/SKU-001/sale"
+    },
+    {
+      "file": "warehouse_staff/10-sale-error.png",
+      "id": "sale-error",
+      "folder": "warehouse_staff",
+      "number": 10,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Xuất vượt tồn kho",
+      "kind": "Trạng thái",
+      "route": "stock/SKU-001/sale",
+      "sourceRoute": "stock/SKU-001/sale"
+    },
+    {
+      "file": "warehouse_staff/11-sale-success.png",
+      "id": "sale-success",
+      "folder": "warehouse_staff",
+      "number": 11,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Xuất bán trực tiếp — đã lưu",
+      "kind": "Kết quả",
+      "route": "product/SKU-001",
+      "sourceRoute": "stock/SKU-001/sale"
+    },
+    {
+      "file": "warehouse_staff/12-count.png",
+      "id": "count",
+      "folder": "warehouse_staff",
+      "number": 12,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Kiểm kê thực tế",
+      "kind": "Màn hình",
+      "route": "stock/SKU-001/count",
+      "sourceRoute": "stock/SKU-001/count"
+    },
+    {
+      "file": "warehouse_staff/13-count-success.png",
+      "id": "count-success",
+      "folder": "warehouse_staff",
+      "number": 13,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Kiểm kê thực tế — đã lưu",
+      "kind": "Kết quả",
+      "route": "product/SKU-001",
+      "sourceRoute": "stock/SKU-001/count"
+    },
+    {
+      "file": "warehouse_staff/14-orders.png",
+      "id": "orders",
+      "folder": "warehouse_staff",
+      "number": 14,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Đơn đã đặt",
+      "kind": "Màn hình",
+      "route": "orders",
+      "sourceRoute": "orders"
+    },
+    {
+      "file": "warehouse_staff/15-orders-detail.png",
+      "id": "orders-detail",
+      "folder": "warehouse_staff",
+      "number": 15,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Đơn đã đặt — chi tiết",
+      "kind": "Màn hình",
+      "route": "record/orders/PO-026",
+      "sourceRoute": "record/orders/PO-026"
+    },
+    {
+      "file": "warehouse_staff/16-orders-empty.png",
+      "id": "orders-empty",
+      "folder": "warehouse_staff",
+      "number": 16,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Đơn đã đặt — danh sách trống",
+      "kind": "Trạng thái",
+      "route": "orders",
+      "sourceRoute": "orders"
+    },
+    {
+      "file": "warehouse_staff/17-orders-completed.png",
+      "id": "orders-completed",
+      "folder": "warehouse_staff",
+      "number": 17,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Đơn đã đặt — hoàn tất",
+      "kind": "Trạng thái",
+      "route": "record/orders/PO-026",
+      "sourceRoute": "record/orders/PO-026"
+    },
+    {
+      "file": "warehouse_staff/18-backorders.png",
+      "id": "backorders",
+      "folder": "warehouse_staff",
+      "number": 18,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Khách chờ hàng",
+      "kind": "Màn hình",
+      "route": "backorders",
+      "sourceRoute": "backorders"
+    },
+    {
+      "file": "warehouse_staff/19-backorders-detail.png",
+      "id": "backorders-detail",
+      "folder": "warehouse_staff",
+      "number": 19,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Khách chờ hàng — chi tiết",
+      "kind": "Màn hình",
+      "route": "record/backorders/BO-014",
+      "sourceRoute": "record/backorders/BO-014"
+    },
+    {
+      "file": "warehouse_staff/20-backorders-empty.png",
+      "id": "backorders-empty",
+      "folder": "warehouse_staff",
+      "number": 20,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Khách chờ hàng — danh sách trống",
+      "kind": "Trạng thái",
+      "route": "backorders",
+      "sourceRoute": "backorders"
+    },
+    {
+      "file": "warehouse_staff/21-backorders-completed.png",
+      "id": "backorders-completed",
+      "folder": "warehouse_staff",
+      "number": 21,
+      "role": "warehouse_staff",
+      "roles": [
+        "warehouse_staff"
+      ],
+      "capturedRole": "staff",
+      "title": "Khách chờ hàng — hoàn tất",
+      "kind": "Trạng thái",
+      "route": "record/backorders/BO-014",
+      "sourceRoute": "record/backorders/BO-014"
+    },
+    {
+      "file": "planner/01-inventory.png",
+      "id": "inventory",
+      "folder": "planner",
+      "number": 1,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Tồn kho",
+      "kind": "Màn hình",
+      "route": "inventory",
+      "sourceRoute": "inventory"
+    },
+    {
+      "file": "planner/02-inventory-empty.png",
+      "id": "inventory-empty",
+      "folder": "planner",
+      "number": 2,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Tìm sản phẩm không có kết quả",
+      "kind": "Trạng thái",
+      "route": "inventory",
+      "sourceRoute": "inventory"
+    },
+    {
+      "file": "planner/03-product.png",
+      "id": "product",
+      "folder": "planner",
+      "number": 3,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Chi tiết sản phẩm",
+      "kind": "Màn hình",
+      "route": "product/SKU-001",
+      "sourceRoute": "product/SKU-001"
+    },
+    {
+      "file": "planner/04-product-no-history.png",
+      "id": "product-no-history",
+      "folder": "planner",
+      "number": 4,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Sản phẩm chưa có biến động",
+      "kind": "Màn hình",
+      "route": "product/SKU-015",
+      "sourceRoute": "product/SKU-015"
+    },
+    {
+      "file": "planner/05-demand.png",
+      "id": "demand",
+      "folder": "planner",
+      "number": 5,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Phân tích nhu cầu",
+      "kind": "Màn hình",
+      "route": "demand",
+      "sourceRoute": "demand"
+    },
+    {
+      "file": "planner/06-demand-missing.png",
+      "id": "demand-missing",
+      "folder": "planner",
+      "number": 6,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Phân tích — thiếu dữ liệu",
+      "kind": "Trạng thái",
+      "route": "demand",
+      "sourceRoute": "demand"
+    },
+    {
+      "file": "planner/07-demand-date-error.png",
+      "id": "demand-date-error",
+      "folder": "planner",
+      "number": 7,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Khoảng ngày không hợp lệ",
+      "kind": "Trạng thái",
+      "route": "demand",
+      "sourceRoute": "demand"
+    },
+    {
+      "file": "planner/08-demand-empty.png",
+      "id": "demand-empty",
+      "folder": "planner",
+      "number": 8,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Lịch sử không có kết quả",
+      "kind": "Trạng thái",
+      "route": "demand",
+      "sourceRoute": "demand"
+    },
+    {
+      "file": "planner/09-alerts.png",
+      "id": "alerts",
+      "folder": "planner",
+      "number": 9,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Cảnh báo bổ sung",
+      "kind": "Màn hình",
+      "route": "alerts",
+      "sourceRoute": "alerts"
+    },
+    {
+      "file": "planner/10-alert.png",
+      "id": "alert",
+      "folder": "planner",
+      "number": 10,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Cơ sở bổ sung — cần nhập",
+      "kind": "Màn hình",
+      "route": "alert/SKU-008",
+      "sourceRoute": "alert/SKU-008"
+    },
+    {
+      "file": "planner/11-alert-sufficient.png",
+      "id": "alert-sufficient",
+      "folder": "planner",
+      "number": 11,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Cơ sở bổ sung — đủ hàng",
+      "kind": "Màn hình",
+      "route": "alert/SKU-002",
+      "sourceRoute": "alert/SKU-002"
+    },
+    {
+      "file": "planner/12-alert-missing.png",
+      "id": "alert-missing",
+      "folder": "planner",
+      "number": 12,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Cơ sở bổ sung — thiếu dữ liệu",
+      "kind": "Màn hình",
+      "route": "alert/SKU-015",
+      "sourceRoute": "alert/SKU-015"
+    },
+    {
+      "file": "planner/13-proposals.png",
+      "id": "proposals",
+      "folder": "planner",
+      "number": 13,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Danh sách đề xuất",
+      "kind": "Màn hình",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "planner/14-proposals-draft.png",
+      "id": "proposals-draft",
+      "folder": "planner",
+      "number": 14,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Lọc đề xuất — Bản nháp",
+      "kind": "Trạng thái",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "planner/15-proposals-pending.png",
+      "id": "proposals-pending",
+      "folder": "planner",
+      "number": 15,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Lọc đề xuất — Chờ duyệt",
+      "kind": "Trạng thái",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "planner/16-proposals-approved.png",
+      "id": "proposals-approved",
+      "folder": "planner",
+      "number": 16,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Lọc đề xuất — Đã duyệt",
+      "kind": "Trạng thái",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "planner/17-proposals-rejected.png",
+      "id": "proposals-rejected",
+      "folder": "planner",
+      "number": 17,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Lọc đề xuất — Từ chối",
+      "kind": "Trạng thái",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "planner/18-proposals-empty.png",
+      "id": "proposals-empty",
+      "folder": "planner",
+      "number": 18,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Danh sách đề xuất trống",
+      "kind": "Trạng thái",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "planner/19-draft-new.png",
+      "id": "draft-new",
+      "folder": "planner",
+      "number": 19,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Tạo đề xuất trống",
+      "kind": "Màn hình",
+      "route": "proposal/DX-43",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "planner/20-draft.png",
+      "id": "draft",
+      "folder": "planner",
+      "number": 20,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Chỉnh sửa bản nháp",
+      "kind": "Màn hình",
+      "route": "proposal/DX-042",
+      "sourceRoute": "proposal/DX-042"
+    },
+    {
+      "file": "planner/21-draft-add-product.png",
+      "id": "draft-add-product",
+      "folder": "planner",
+      "number": 21,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Thêm sản phẩm vào bản nháp",
+      "kind": "Hộp thoại",
+      "route": "proposal/DX-042",
+      "sourceRoute": "proposal/DX-042"
+    },
+    {
+      "file": "planner/22-draft-over-budget.png",
+      "id": "draft-over-budget",
+      "folder": "planner",
+      "number": 22,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Bản nháp vượt ngân sách",
+      "kind": "Trạng thái",
+      "route": "proposal/DX-042",
+      "sourceRoute": "proposal/DX-042"
+    },
+    {
+      "file": "planner/23-draft-ai-explain.png",
+      "id": "draft-ai-explain",
+      "folder": "planner",
+      "number": 23,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "AI giải thích cơ sở",
+      "kind": "Trạng thái",
+      "route": "proposal/DX-042",
+      "sourceRoute": "proposal/DX-042"
+    },
+    {
+      "file": "planner/24-draft-ai-suggest.png",
+      "id": "draft-ai-suggest",
+      "folder": "planner",
+      "number": 24,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "AI đề nghị số lượng — chưa áp dụng",
+      "kind": "Trạng thái",
+      "route": "proposal/DX-042",
+      "sourceRoute": "proposal/DX-042"
+    },
+    {
+      "file": "planner/25-draft-ai-applied.png",
+      "id": "draft-ai-applied",
+      "folder": "planner",
+      "number": 25,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Đã áp dụng gợi ý AI",
+      "kind": "Kết quả",
+      "route": "proposal/DX-042",
+      "sourceRoute": "proposal/DX-042"
+    },
+    {
+      "file": "planner/26-draft-ai-error.png",
+      "id": "draft-ai-error",
+      "folder": "planner",
+      "number": 26,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "AI không khả dụng",
+      "kind": "Trạng thái",
+      "route": "proposal/DX-042",
+      "sourceRoute": "proposal/DX-042"
+    },
+    {
+      "file": "planner/27-draft-submitted.png",
+      "id": "draft-submitted",
+      "folder": "planner",
+      "number": 27,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Đã gửi phê duyệt",
+      "kind": "Kết quả",
+      "route": "proposal/DX-042",
+      "sourceRoute": "proposal/DX-042"
+    },
+    {
+      "file": "planner/28-proposal-pending.png",
+      "id": "proposal-pending",
+      "folder": "planner",
+      "number": 28,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Chi tiết đề xuất — Chờ duyệt",
+      "kind": "Màn hình",
+      "route": "proposal/DX-041",
+      "sourceRoute": "proposal/DX-041"
+    },
+    {
+      "file": "planner/29-proposal-approved.png",
+      "id": "proposal-approved",
+      "folder": "planner",
+      "number": 29,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Chi tiết đề xuất — Đã duyệt",
+      "kind": "Màn hình",
+      "route": "proposal/DX-040",
+      "sourceRoute": "proposal/DX-040"
+    },
+    {
+      "file": "planner/30-proposal-rejected.png",
+      "id": "proposal-rejected",
+      "folder": "planner",
+      "number": 30,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Chi tiết đề xuất — Từ chối",
+      "kind": "Màn hình",
+      "route": "proposal/DX-039",
+      "sourceRoute": "proposal/DX-039"
+    },
+    {
+      "file": "planner/31-draft-copied.png",
+      "id": "draft-copied",
+      "folder": "planner",
+      "number": 31,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Sao chép đề xuất bị từ chối",
+      "kind": "Kết quả",
+      "route": "proposal/DX-43",
+      "sourceRoute": "proposal/DX-039"
+    },
+    {
+      "file": "planner/32-catalog.png",
+      "id": "catalog",
+      "folder": "planner",
+      "number": 32,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Sản phẩm và nhà cung cấp",
+      "kind": "Màn hình",
+      "route": "catalog",
+      "sourceRoute": "catalog"
+    },
+    {
+      "file": "planner/33-product-new.png",
+      "id": "product-new",
+      "folder": "planner",
+      "number": 33,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Thêm sản phẩm",
+      "kind": "Màn hình",
+      "route": "editproduct/new",
+      "sourceRoute": "editproduct/new"
+    },
+    {
+      "file": "planner/34-product-edit.png",
+      "id": "product-edit",
+      "folder": "planner",
+      "number": 34,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Chỉnh sửa sản phẩm và chính sách",
+      "kind": "Màn hình",
+      "route": "editproduct/SKU-001",
+      "sourceRoute": "editproduct/SKU-001"
+    },
+    {
+      "file": "planner/35-supplier-new.png",
+      "id": "supplier-new",
+      "folder": "planner",
+      "number": 35,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Thêm nhà cung cấp",
+      "kind": "Hộp thoại",
+      "route": "catalog",
+      "sourceRoute": "catalog"
+    },
+    {
+      "file": "planner/36-supplier-edit.png",
+      "id": "supplier-edit",
+      "folder": "planner",
+      "number": 36,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Chỉnh sửa nhà cung cấp",
+      "kind": "Hộp thoại",
+      "route": "catalog",
+      "sourceRoute": "catalog"
+    },
+    {
+      "file": "planner/37-orders.png",
+      "id": "orders",
+      "folder": "planner",
+      "number": 37,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Đơn đã đặt",
+      "kind": "Màn hình",
+      "route": "orders",
+      "sourceRoute": "orders"
+    },
+    {
+      "file": "planner/38-orders-detail.png",
+      "id": "orders-detail",
+      "folder": "planner",
+      "number": 38,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Đơn đã đặt — chi tiết",
+      "kind": "Màn hình",
+      "route": "record/orders/PO-026",
+      "sourceRoute": "record/orders/PO-026"
+    },
+    {
+      "file": "planner/39-orders-new.png",
+      "id": "orders-new",
+      "folder": "planner",
+      "number": 39,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Đơn đã đặt — ghi nhận mới",
+      "kind": "Màn hình",
+      "route": "record/orders/new",
+      "sourceRoute": "record/orders/new"
+    },
+    {
+      "file": "planner/40-orders-cancel.png",
+      "id": "orders-cancel",
+      "folder": "planner",
+      "number": 40,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Đơn đã đặt — hủy phần còn lại",
+      "kind": "Hộp thoại",
+      "route": "record/orders/PO-026",
+      "sourceRoute": "record/orders/PO-026"
+    },
+    {
+      "file": "planner/41-orders-empty.png",
+      "id": "orders-empty",
+      "folder": "planner",
+      "number": 41,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Đơn đã đặt — danh sách trống",
+      "kind": "Trạng thái",
+      "route": "orders",
+      "sourceRoute": "orders"
+    },
+    {
+      "file": "planner/42-orders-completed.png",
+      "id": "orders-completed",
+      "folder": "planner",
+      "number": 42,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Đơn đã đặt — hoàn tất",
+      "kind": "Trạng thái",
+      "route": "record/orders/PO-026",
+      "sourceRoute": "record/orders/PO-026"
+    },
+    {
+      "file": "planner/43-backorders.png",
+      "id": "backorders",
+      "folder": "planner",
+      "number": 43,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Khách chờ hàng",
+      "kind": "Màn hình",
+      "route": "backorders",
+      "sourceRoute": "backorders"
+    },
+    {
+      "file": "planner/44-backorders-detail.png",
+      "id": "backorders-detail",
+      "folder": "planner",
+      "number": 44,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Khách chờ hàng — chi tiết",
+      "kind": "Màn hình",
+      "route": "record/backorders/BO-014",
+      "sourceRoute": "record/backorders/BO-014"
+    },
+    {
+      "file": "planner/45-backorders-new.png",
+      "id": "backorders-new",
+      "folder": "planner",
+      "number": 45,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Khách chờ hàng — ghi nhận mới",
+      "kind": "Màn hình",
+      "route": "record/backorders/new",
+      "sourceRoute": "record/backorders/new"
+    },
+    {
+      "file": "planner/46-backorders-cancel.png",
+      "id": "backorders-cancel",
+      "folder": "planner",
+      "number": 46,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Khách chờ hàng — hủy phần còn lại",
+      "kind": "Hộp thoại",
+      "route": "record/backorders/BO-014",
+      "sourceRoute": "record/backorders/BO-014"
+    },
+    {
+      "file": "planner/47-backorders-empty.png",
+      "id": "backorders-empty",
+      "folder": "planner",
+      "number": 47,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Khách chờ hàng — danh sách trống",
+      "kind": "Trạng thái",
+      "route": "backorders",
+      "sourceRoute": "backorders"
+    },
+    {
+      "file": "planner/48-backorders-completed.png",
+      "id": "backorders-completed",
+      "folder": "planner",
+      "number": 48,
+      "role": "planner",
+      "roles": [
+        "planner"
+      ],
+      "capturedRole": "planner",
+      "title": "Khách chờ hàng — hoàn tất",
+      "kind": "Trạng thái",
+      "route": "record/backorders/BO-014",
+      "sourceRoute": "record/backorders/BO-014"
+    },
+    {
+      "file": "manager/01-dashboard.png",
+      "id": "dashboard",
+      "folder": "manager",
+      "number": 1,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Tổng quan tồn kho",
+      "kind": "Màn hình",
+      "route": "dashboard",
+      "sourceRoute": "dashboard"
+    },
+    {
+      "file": "manager/02-proposals.png",
+      "id": "proposals",
+      "folder": "manager",
+      "number": 2,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Danh sách đề xuất",
+      "kind": "Màn hình",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "manager/03-proposals-pending.png",
+      "id": "proposals-pending",
+      "folder": "manager",
+      "number": 3,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Lọc đề xuất — Chờ duyệt",
+      "kind": "Trạng thái",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "manager/04-proposals-approved.png",
+      "id": "proposals-approved",
+      "folder": "manager",
+      "number": 4,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Lọc đề xuất — Đã duyệt",
+      "kind": "Trạng thái",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "manager/05-proposals-rejected.png",
+      "id": "proposals-rejected",
+      "folder": "manager",
+      "number": 5,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Lọc đề xuất — Từ chối",
+      "kind": "Trạng thái",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "manager/06-proposals-empty.png",
+      "id": "proposals-empty",
+      "folder": "manager",
+      "number": 6,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Danh sách đề xuất trống",
+      "kind": "Trạng thái",
+      "route": "proposals",
+      "sourceRoute": "proposals"
+    },
+    {
+      "file": "manager/07-proposal-pending.png",
+      "id": "proposal-pending",
+      "folder": "manager",
+      "number": 7,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Chi tiết đề xuất — Chờ duyệt",
+      "kind": "Màn hình",
+      "route": "proposal/DX-041",
+      "sourceRoute": "proposal/DX-041"
+    },
+    {
+      "file": "manager/08-reject-dialog.png",
+      "id": "reject-dialog",
+      "folder": "manager",
+      "number": 8,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Nhập lý do từ chối",
+      "kind": "Hộp thoại",
+      "route": "proposal/DX-041",
+      "sourceRoute": "proposal/DX-041"
+    },
+    {
+      "file": "manager/09-approved-result.png",
+      "id": "approved-result",
+      "folder": "manager",
+      "number": 9,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Kết quả phê duyệt",
+      "kind": "Kết quả",
+      "route": "proposal/DX-041",
+      "sourceRoute": "proposal/DX-041"
+    },
+    {
+      "file": "manager/10-rejected-result.png",
+      "id": "rejected-result",
+      "folder": "manager",
+      "number": 10,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Kết quả từ chối",
+      "kind": "Kết quả",
+      "route": "proposal/DX-041",
+      "sourceRoute": "proposal/DX-041"
+    },
+    {
+      "file": "manager/11-proposal-approved.png",
+      "id": "proposal-approved",
+      "folder": "manager",
+      "number": 11,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Chi tiết đề xuất — Đã duyệt",
+      "kind": "Màn hình",
+      "route": "proposal/DX-040",
+      "sourceRoute": "proposal/DX-040"
+    },
+    {
+      "file": "manager/12-proposal-rejected.png",
+      "id": "proposal-rejected",
+      "folder": "manager",
+      "number": 12,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Chi tiết đề xuất — Từ chối",
+      "kind": "Màn hình",
+      "route": "proposal/DX-039",
+      "sourceRoute": "proposal/DX-039"
+    },
+    {
+      "file": "manager/13-draft-denied.png",
+      "id": "draft-denied",
+      "folder": "manager",
+      "number": 13,
+      "role": "manager",
+      "roles": [
+        "manager"
+      ],
+      "capturedRole": "manager",
+      "title": "Không được truy cập bản nháp",
+      "kind": "Chặn quyền",
+      "route": "proposal/DX-042",
+      "sourceRoute": "proposal/DX-042"
+    }
+  ]
+}

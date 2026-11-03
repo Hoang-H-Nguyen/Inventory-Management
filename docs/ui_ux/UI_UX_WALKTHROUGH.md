@@ -1,206 +1,208 @@
 # StockMate — UI/UX Walkthrough
 
-Tài liệu này mô tả prototype web hiện tại, được cập nhật theo [README](../../README.md), [Information Architecture](../information_architecture/INFORMATION_ARCHITECTURE.md) và [Business Rules](../BUSINESS_RULES.md), bao phủ US01–US14.
+This document describes the current web prototype for US01–US14, aligned with the [project requirements](../../README.md), [Information Architecture](../information_architecture/INFORMATION_ARCHITECTURE.md) and [Business Rules](../requirements/BUSINESS_RULES.md).
 
-Prototype StockMate hỗ trợ theo dõi Inventory Position, đề xuất nhiều sản phẩm/nhà cung cấp, ngân sách riêng, AI hỗ trợ bản nháp và các chứng từ outstanding. Tài liệu sử dụng 10 ảnh giao diện tiêu biểu chụp từ prototype.
+StockMate demonstrates Inventory Position tracking, proposals with multiple products and suppliers, individual proposal budgets, AI-assisted drafts and outstanding records. The walkthrough uses 10 representative screenshots. Documentation is in English; the prototype interface and screenshots remain in Vietnamese. English action names below describe the corresponding controls in those screenshots.
 
-## 1. Mở và trải nghiệm
+### Screen catalog by function and role
 
-Mở [prototype/index.html](./prototype/index.html) trực tiếp bằng trình duyệt. Không cần build hay thư viện frontend. Nếu trình duyệt không cho lưu localStorage qua file, chạy server từ thư mục repo:
+Browse the [complete screen catalog](./prototype/screenshots/SCREENSHOT_INDEX.md): [Common](./prototype/screenshots/common/COMMON_SCREENS.md) · [Admin](./prototype/screenshots/admin/ADMIN_SCREENS.md) · [Warehouse Staff](./prototype/screenshots/warehouse_staff/WAREHOUSE_STAFF_SCREENS.md) · [Planner](./prototype/screenshots/planner/PLANNER_SCREENS.md) · [Manager](./prototype/screenshots/manager/MANAGER_SCREENS.md). Images are numbered by functional flow. Shared screens are in `common`; warehouse staff screens are in `warehouse_staff`. Catalogs cover pages, forms, dialogs and key states; the 10 illustrations below are retained.
+
+## 1. Open and explore
+
+Open [prototype/index.html](./prototype/index.html) directly in a browser. No build or frontend library is required. If localStorage is unavailable for local files, start the server from the repository root:
 
 ~~~sh
 node docs/ui_ux/prototype/serve.mjs
 ~~~
 
-Mở **http://127.0.0.1:4173**. Xem [hướng dẫn chạy và kiểm tra](./prototype/README.md) để biết cấu trúc mã nguồn, cách đặt lại dữ liệu và chụp lại 10 ảnh.
+Open **http://127.0.0.1:4173**. See the [prototype guide](./prototype/README.md) for source structure, data reset and screenshot capture instructions.
 
-### Đăng nhập và đổi mật khẩu — US13
+### Sign in and change passwords — US13
 
-![Đăng nhập StockMate](./prototype/screenshots/00-login.png)
+![StockMate login](./prototype/screenshots/00-login.png)
 
-Màn hình đăng nhập giới thiệu ngắn gọn giá trị của StockMate: **Nắm chắc tồn kho. Chủ động nhập hàng.** Bố cục hai phần gồm giới thiệu ứng dụng và form đăng nhập với tên đăng nhập, mật khẩu, nút **Đăng nhập** cùng hướng dẫn liên hệ quản trị viên. Trên điện thoại, hai phần xếp dọc để dễ đọc và thao tác.
+The login screen introduces StockMate with the message **Know your stock. Plan replenishment ahead.** Its two-panel layout contains the product introduction and a form with username, password, a **Sign in** button and guidance to contact the administrator. On mobile, the panels stack vertically.
 
-Ảnh minh họa là trạng thái ban đầu: các ô nhập trống, không hiển thị tài khoản, mật khẩu mẫu hay nút điền sẵn. Thông tin dùng để kiểm tra prototype được ghi riêng trong [hướng dẫn kỹ thuật](./prototype/README.md#tài-khoản-và-đăng-nhập). Người dùng đăng nhập bằng tài khoản do quản trị viên cấp; tên và vai trò ở thanh trên phản ánh tài khoản hiện tại, không có bộ chọn vai trò.
+The screenshot shows the initial state: empty fields, with no sample credentials or autofill buttons. Test credentials are documented separately in the [technical guide](./prototype/README.md#accounts-and-sign-in). Users sign in with administrator-issued accounts. The top bar shows the current user's identity and role; there is no role switcher.
 
-Tài khoản do Admin tạo hoặc cấp lại mật khẩu phải đổi mật khẩu tạm trước khi vào nghiệp vụ. Mật khẩu cần 8–128 ký tự; kiểm tra mật khẩu hiện tại, xác nhận khớp và mật khẩu mới khác mật khẩu hiện tại.
+Accounts created or reset by Admin must replace their temporary password before accessing business screens. Passwords require 8–128 characters. The current password must be correct, confirmation must match, and the new password must differ from the current one.
 
-Sai mật khẩu hoặc tài khoản bị khóa hiển thị lỗi chung. Username được chuẩn hóa chữ thường. **Đăng xuất** kết thúc phiên của tab; đổi mật khẩu, cấp lại mật khẩu, đổi vai trò hoặc khóa tài khoản làm các phiên trước đó hết hiệu lực. Đổi mật khẩu thành công giữ một phiên cho tab hiện tại. Có thể mở hai tab để thử thu hồi phiên.
+Incorrect credentials and locked accounts produce a generic error. Usernames are normalized to lowercase. **Sign out** ends the tab's session. Password changes/resets, role changes and account locking invalidate earlier sessions. A successful password change keeps one replacement session for the current tab. Use two tabs to test session revocation.
 
-**Đặt lại mẫu** chỉ khôi phục dữ liệu nghiệp vụ; tài khoản và mật khẩu đã chỉnh được giữ nguyên.
+**Reset sample data** restores business fixtures while preserving edited accounts and passwords.
 
-
-
-| Vai trò | Điều hướng và nhiệm vụ |
+| Role | Navigation and responsibilities |
 |---|---|
-| Admin | Quản trị tài khoản; tạo/sửa/khóa/mở khóa/cấp mật khẩu tạm |
-| Nhân viên kho | Tồn kho, Đơn đã đặt, Khách chờ hàng; nhận hàng, xuất bán/giao khách và kiểm kê |
-| Inventory Planner | Tồn kho, Phân tích nhu cầu, Cảnh báo bổ sung, Đề xuất, Sản phẩm & nhà cung cấp, Đơn đã đặt, Khách chờ hàng |
-| Quản lý | Tổng quan và Đề xuất; xem xét, phê duyệt hoặc từ chối |
+| Admin | Account administration: create, edit, lock, unlock and issue temporary passwords |
+| Warehouse Staff | Inventory, Placed Orders and Customer Backorders; receive goods, record sales/deliveries and count stock |
+| Inventory Planner | Inventory, Demand Analysis, Replenishment Alerts, Proposals, Products & Suppliers, Placed Orders and Customer Backorders |
+| Manager | Dashboard and Proposals; review, approve or reject |
 
-Luồng chính: **Theo dõi tồn kho → Phân tích nhu cầu → Xác định nhu cầu bổ sung → Chuẩn bị và gửi đề xuất → Quản lý quyết định**.
+Main flow: **Monitor inventory → Analyze demand → Identify replenishment needs → Prepare and submit a proposal → Manager decides**.
 
-## 2. Nhân viên kho: theo dõi và ghi nhận tồn kho
+## 2. Warehouse Staff: monitor and record inventory
 
-### Tra cứu sản phẩm — US01
+### Find a product — US01
 
-Mở Tồn kho, tìm theo SKU hoặc tên, rồi chọn **Chi tiết**. Bảng hiển thị đơn vị, tồn hiện có, đang đặt, khách chờ và Inventory Position. Kết quả tìm kiếm rỗng có thông báo và nút xóa tìm kiếm.
+Open Inventory, search by SKU or name, then select **Details**. The table shows units, on-hand stock, on-order quantities, backorders and Inventory Position. An empty search result includes an explanation and a clear-search button.
 
-![Tồn kho — Nhân viên kho](./prototype/screenshots/02-inventory-staff.png)
+![Inventory — Warehouse Staff](./prototype/screenshots/02-inventory-staff.png)
 
-**Inventory Position = Hiện có + Đang đặt − Khách chờ hàng.** Chi tiết sản phẩm hiển thị các số thành phần, nhà cung cấp và lịch sử biến động theo người ghi nhận, thời gian và lý do.
+**Inventory Position = On hand + On order − Customer backorders.** Product details show each quantity, suppliers and movement history with the recorder, time and reason.
 
-### Nhận hàng, xuất bán và kiểm kê — US02
+### Receive goods, record sales and count stock — US02
 
-Từ chi tiết sản phẩm, chọn đúng nghiệp vụ. Ảnh dưới minh họa nhận hàng theo đơn đã đặt.
+Choose the relevant operation from product details. The screenshot below shows a receipt against an existing placed order.
 
-![Nhận hàng theo đơn đã đặt](./prototype/screenshots/04-receipt.png)
+![Receive goods against a placed order](./prototype/screenshots/04-receipt.png)
 
-| Nghiệp vụ | Nhập liệu và kiểm tra | Kết quả |
+| Operation | Input and validation | Result |
 |---|---|---|
-| Nhận hàng | Chọn đơn của đúng SKU, nhập số thực nhận và lý do; không vượt phần chưa nhận | Tăng hiện có, giảm đang đặt cùng số lượng |
-| Bán trực tiếp | Nhập số thực giao và lý do; không vượt tồn hiện có | Giảm hiện có, ghi một lần bán |
-| Giao khách chờ | Chọn backorder, nhập số giao và lý do; không vượt tồn hoặc phần còn nợ | Giảm hiện có và backorder, chỉ ghi một lần bán |
-| Kiểm kê | Nhập tổng số đếm thực tế và lý do; cho phép tổng bằng 0 | Đặt tồn về tổng đã nhập, lưu chênh lệch qua lịch sử; không tạo doanh số |
+| Receipt | Select an order for the SKU; enter actual received quantity and reason; do not exceed the outstanding quantity | Increase on hand and decrease on order by the same quantity |
+| Direct sale | Enter delivered quantity and reason; do not exceed on-hand stock | Decrease on hand and record one sale |
+| Backorder delivery | Select a backorder; enter quantity and reason; do not exceed stock or outstanding demand | Decrease on hand and backorders; record the sale once |
+| Physical count | Enter the total counted quantity and reason; zero is allowed | Set on hand to the count and record the difference in history; do not create sales |
 
-Cho phép nhận/giao từng phần. Sau khi lưu, quay về chi tiết sản phẩm, hiển thị thông báo thành công và số tồn mới. Nhập sai giữ nguyên form và hiển thị lỗi để sửa.
+Partial receipts and deliveries are supported. Saving returns to product details with a success notification and updated stock. Invalid input stays in the form with an error to correct.
 
-Ví dụ độc lập, bắt đầu từ dữ liệu mẫu: SKU-001 hiện có 60 ram, đơn PO-026 còn 40 ram. Nhận thêm 20 ram → hiện có 80, đơn còn 20. Không tự coi phần còn lại là đã nhận hoặc đã hủy.
+Independent example starting from the fixture: SKU-001 has 60 reams on hand, with 40 reams outstanding on PO-026. Receive 20 → on hand becomes 80, with 20 still outstanding. The remaining quantity is not automatically received or cancelled.
 
-## 3. Planner: từ nhu cầu đến đề xuất
+## 3. Inventory Planner: from demand to proposals
 
-### Phân tích nhu cầu — US03, US04
+### Analyze demand — US03, US04
 
-Chọn sản phẩm và khoảng ngày để xem lịch sử bán. Bộ lọc lịch sử không thay đổi cửa sổ tính nhu cầu.
+Select a product and date range to inspect sales history. History filters do not change the demand calculation window.
 
-![Phân tích nhu cầu và lịch sử bán](./prototype/screenshots/11-demand.png)
+![Demand analysis and sales history](./prototype/screenshots/11-demand.png)
 
-Ngày nghiệp vụ demo là **02/11/2026**. Nhu cầu dùng **03/10–01/11/2026**, tức 30 ngày lịch đã hoàn tất, không gồm hôm nay:
-
-~~~text
-Nhu cầu trung bình/ngày = Tổng bán trong 30 ngày / 30
-ROP = Nhu cầu trung bình/ngày × Lead time + Tồn an toàn
-~~~
-
-Lịch sử bao gồm giao backorder đúng một lần, loại trừ nhận hàng và kiểm kê. Chọn SKU-015 để thử thiếu dữ liệu: nhu cầu, ROP và khuyến nghị là **—**, có thông báo thiếu lịch sử; không coi thiếu dữ liệu là nhu cầu bằng 0.
-
-### Kiểm tra cảnh báo — US05
-
-Mở **Cảnh báo bổ sung**, chọn **Kiểm tra lại** hoặc mở cơ sở của từng SKU. Nhóm cần bổ sung chỉ gồm SKU có **Inventory Position ≤ ROP**; dữ liệu thiếu được tách riêng. Chi tiết cho thấy tồn hiện có, đang đặt, khách chờ, nhu cầu, lead time, an toàn và mục tiêu.
+The demo business date is **2 November 2026**. Demand uses **3 October–1 November 2026**, the last 30 completed calendar days, excluding today:
 
 ~~~text
-Ví dụ SKU-008 — Bút bi Thiên Long, đơn vị cây:
-Tổng bán 30 ngày = 150 → Nhu cầu = 150 / 30 = 5 cây/ngày
-ROP = 5 × 4 + 10 = 30 cây
-Position = 20 + 0 − 0 = 20 cây
-20 ≤ 30 → Cần bổ sung
-Gợi ý = max(0, 100 − 20) = 80 cây
-80 × 5.000 VND = 400.000 VND
+Average daily demand = Total sales over 30 days / 30
+ROP = Average daily demand × Lead time + Safety stock
 ~~~
 
-Chọn **Tạo bản nháp** để đưa sản phẩm sang đề xuất. Với dữ liệu thiếu, không tạo khuyến nghị giả.
+History includes backorder deliveries once and excludes receipts and physical counts. Select SKU-015 to see missing data: demand, ROP and recommendations display **—** with a missing-history notice. Missing data is not treated as zero demand.
 
-### Chuẩn bị bản nháp qua form hoặc AI — US06
+### Check replenishment alerts — US05
 
-Mở **Đề xuất nhập hàng → Tạo đề xuất**, hoặc bắt đầu từ cảnh báo. Bản nháp có thể chứa nhiều sản phẩm và nhiều nhà cung cấp. Planner thêm/xóa dòng, chọn nhà cung cấp cho từng sản phẩm, sửa số lượng và ngân sách.
+Open **Replenishment Alerts**, select **Check again**, or inspect an SKU's calculation basis. Only SKUs with **Inventory Position ≤ ROP** enter the replenishment group. Missing data is listed separately. Details show on hand, on order, backorders, demand, lead time, safety stock and target stock.
 
-![Đề xuất nhiều sản phẩm, ngân sách và trợ lý bản nháp](./prototype/screenshots/16-draft.png)
+~~~text
+Example SKU-008 — Thien Long ballpoint pen, unit: pen
+30-day sales = 150 → Demand = 150 / 30 = 5 pens/day
+ROP = 5 × 4 + 10 = 30 pens
+Position = 20 + 0 − 0 = 20 pens
+20 ≤ 30 → Replenishment needed
+Suggested quantity = max(0, 100 − 20) = 80 pens
+80 × VND 5,000 = VND 400,000
+~~~
 
-| Thành phần | Hành vi hiện tại |
+Select **Create draft** to add the product to a proposal. No fabricated recommendation is produced when data is missing.
+
+### Prepare a draft with forms or AI — US06
+
+Open **Replenishment Proposals → Create proposal**, or start from an alert. A draft can contain multiple products and suppliers. The Planner adds/removes lines, selects a supplier per product, and edits quantities and the budget.
+
+![Multi-product proposal, budget and draft assistant](./prototype/screenshots/16-draft.png)
+
+| Element | Current behavior |
 |---|---|
-| Gợi ý số lượng | max(0, Mục tiêu − Inventory Position); tách khỏi số lượng Planner chọn |
-| Nhà cung cấp | Chọn trong các NCC liên kết với sản phẩm; cập nhật đơn giá dòng |
-| Thành tiền | Số lượng chọn × Đơn giá; tính lại khi thay đổi |
-| Ngân sách | Hạn mức riêng từng đề xuất; không có quỹ chung |
-| Vượt ngân sách | Hiển thị số vượt và vô hiệu hóa gửi; Planner sửa số lượng, xóa dòng hoặc tăng hạn mức |
-| Lưu bản nháp | Lưu cục bộ để xem lại; thay đổi hợp lệ cũng được lưu khi xác nhận trường |
-| Gửi phê duyệt | Chỉ Planner gửi Draft → Pending; yêu cầu có sản phẩm, số lượng nguyên dương và không vượt ngân sách |
-| Trợ lý AI mẫu | Giải thích hoặc đề nghị số lượng từ dữ liệu mẫu; Planner chọn áp dụng vào Draft |
-| AI lỗi | Nút mô phỏng lỗi hiển thị thông báo; form và việc lưu/gửi vẫn hoạt động |
+| Suggested quantity | max(0, Target − Inventory Position); separate from the Planner's selected quantity |
+| Supplier | Choose from the product's linked suppliers; update the line's unit price |
+| Line total | Selected quantity × Unit price; recalculated after changes |
+| Budget | Separate limit for each proposal; no shared fund |
+| Over budget | Show the excess and disable submission; the Planner changes quantities, removes lines or increases the limit |
+| Save draft | Save locally for later review; valid field changes are also persisted when committed |
+| Submit | Only the Planner submits Draft → Pending; requires products, positive integer quantities and a total within budget |
+| Sample AI assistant | Explain calculations or suggest quantities from fixtures; the Planner chooses whether to apply them |
+| AI failure | A simulation button displays a failure notice; forms, saving and submission remain available |
 
-Bộ mẫu DX-042: giấy A4 210 ram × 60.000 = 12.600.000 VND, bút 80 cây × 5.000 = 400.000 VND. Tổng **13.000.000 VND**, ngân sách **14.000.000 VND**. Đổi ngân sách thành 10.000.000 để thử vượt 3.000.000; số lượng không tự giảm.
+Fixture DX-042 contains 210 reams of A4 paper × VND 60,000 = VND 12,600,000 and 80 pens × VND 5,000 = VND 400,000. Total: **VND 13,000,000**; budget: **VND 14,000,000**. Change the budget to VND 10,000,000 to show an excess of VND 3,000,000. Quantities are not reduced automatically.
 
-AI không gửi đề xuất, không duyệt và không ghi nhận kho/đơn hàng. Đây là phản hồi mô phỏng có nhãn, chưa gọi dịch vụ AI. Khi triển khai thật, AI phải sử dụng dữ liệu truy xuất và kết quả tính từ backend.
+AI does not submit or approve proposals, or record stock/order changes. Responses are labeled simulations; no AI service is called. Production AI must use retrieved data and backend calculation results.
 
-### Theo dõi và sao chép — US07, US09
+### Track and copy proposals — US07, US09
 
-Danh sách có bộ lọc Draft/Pending/Approved/Rejected. Chi tiết lưu sản phẩm, nhà cung cấp, số lượng, giá, tổng tiền, ngân sách và lịch sử chỉnh sửa/quyết định.
+The list provides Draft/Pending/Approved/Rejected filters. Details preserve products, suppliers, quantities, prices, totals, budgets and edit/decision history.
 
-Sau khi gửi, vẫn ở chi tiết với trạng thái Chờ duyệt và nội dung chỉ đọc. Planner có thể mở DX-039 bị từ chối, chọn **Sao chép thành bản nháp**: bản mới liên kết về bản gốc, lấy lại dữ liệu/giá hiện tại và cho phép sửa. Bản gốc cùng lý do và lịch sử được giữ nguyên.
+Submission keeps the user on the details page with Pending status and read-only content. The Planner can open rejected proposal DX-039 and select **Copy as draft**. The new draft links to the original, retrieves current data/prices and allows editing. The original reason and history remain unchanged.
 
-## 4. Quản lý: theo dõi và quyết định
+## 4. Manager: monitor and decide
 
 ### Dashboard — US10
 
-Dashboard hiển thị số SKU hoạt động, SKU cần bổ sung, đề xuất Pending và SKU thiếu dữ liệu. Các số lấy từ bộ dữ liệu trong trình duyệt, không dùng tổng giả lập ngoài danh mục.
+The dashboard shows active SKUs, SKUs needing replenishment, Pending proposals and SKUs with missing data. Totals are calculated from the browser fixture rather than unrelated placeholder counts.
 
-![Dashboard — Quản lý](./prototype/screenshots/01-dashboard.png)
+![Dashboard — Manager](./prototype/screenshots/01-dashboard.png)
 
-### Duyệt hoặc từ chối — US07, US08, US09
+### Approve or reject — US07, US08, US09
 
-Mở danh sách đề xuất, chọn DX-041 Chờ duyệt. Đọc các dòng sản phẩm/NCC, chi phí, ngân sách và lịch sử trước khi quyết định.
+Open the proposal list and select Pending proposal DX-041. Review product/supplier lines, costs, budget and history before deciding.
 
-![Chi tiết đề xuất chờ Quản lý quyết định](./prototype/screenshots/21-review.png)
+![Pending proposal awaiting a Manager decision](./prototype/screenshots/21-review.png)
 
-| Thao tác | Kết quả và phản hồi |
+| Action | Result and feedback |
 |---|---|
-| Phê duyệt | Pending → Approved, lưu người và thời gian; ở lại chi tiết |
-| Từ chối | Mở hộp thoại; bắt buộc lý do không rỗng trước khi lưu Rejected |
-| Xem đề xuất đã xử lý | Hiển thị quyết định/lý do và lịch sử; không còn nút quyết định lần hai |
-| Xem Draft | Manager không có quyền xem bản nháp của Planner |
+| Approve | Pending → Approved; record reviewer and time; remain on details |
+| Reject | Open a dialog; require a non-empty reason before saving Rejected |
+| View a decided proposal | Show the decision/reason and history; no second decision buttons |
+| View a Draft | The Manager cannot access the Planner's drafts |
 
-**Phê duyệt chỉ ghi nhận quyết định.** Không tự tạo đơn mua, không tăng đang đặt hay hiện có. Planner ghi nhận riêng đơn đã thực sự đặt với NCC.
+**Approval only records a decision.** It does not create purchase orders or increase on-order/on-hand stock. The Planner separately records orders actually placed with suppliers.
 
-## 5. Dữ liệu nền và phần chưa hoàn tất
+## 5. Master data and outstanding records
 
-### Sản phẩm, nhà cung cấp và chính sách — US11
+### Products, suppliers and policies — US11
 
-![Danh mục sản phẩm, giá theo NCC và chính sách tồn](./prototype/screenshots/26-catalog.png)
+![Products, supplier prices and stock policies](./prototype/screenshots/26-catalog.png)
 
-Planner thêm/chỉnh sản phẩm, đơn vị, lead time, tồn an toàn, mục tiêu; liên kết một hoặc nhiều NCC với đơn giá riêng. Form nhà cung cấp hỗ trợ thêm/chỉnh tên và liên hệ.
+The Planner adds/edits products, units, lead times, safety stock and targets; each product links to one or more suppliers with individual prices. Supplier forms support adding/editing names and contact details.
 
-Sản phẩm mới bắt đầu với hiện có 0 và trạng thái thiếu lịch sử bán. Giá/tên/đơn vị trong đề xuất đã lập là snapshot: sửa danh mục không sửa thông tin lịch sử của đề xuất. Bản sao từ đề xuất bị từ chối phải được kiểm tra lại trước khi gửi.
+New products start with zero on hand and missing sales history. Proposal prices, names and units are snapshots: catalog edits do not rewrite historical proposal data. Copies of rejected proposals must be reviewed before submission.
 
-### Đơn đã đặt và khách chờ hàng — US12
+### Placed orders and customer backorders — US12
 
-![Theo dõi đơn đã đặt và phần chưa nhận](./prototype/screenshots/29-orders.png)
+![Placed orders and outstanding quantities](./prototype/screenshots/29-orders.png)
 
-| Vai trò | Đơn đã đặt | Khách chờ hàng |
+| Role | Placed orders | Customer backorders |
 |---|---|---|
-| Planner | Ghi nhận SKU, NCC, số đã đặt thực tế, ngày và ghi chú | Ghi nhận SKU, khách hàng, số chưa đáp ứng, ngày và ghi chú |
-| Staff | Mở chứng từ để nhận từng phần | Mở chứng từ để giao từng phần |
-| Planner | Hủy số chưa nhận kèm lý do | Hủy số chưa giao kèm lý do |
+| Planner | Record SKU, supplier, actual ordered quantity, date and notes | Record SKU, customer, unmet quantity, date and notes |
+| Warehouse Staff | Open a record to receive part of an order | Open a record to deliver part of a backorder |
+| Planner | Cancel unreceived quantities with a reason | Cancel undelivered quantities with a reason |
 
 ~~~text
-Đang đặt = Số đặt ban đầu − Đã nhận − Đã hủy
-Backorder = Số chờ ban đầu − Đã giao − Đã hủy
+On order = Original ordered quantity − Received − Cancelled
+Backorders = Original unmet quantity − Delivered − Cancelled
 ~~~
 
-Chi tiết chứng từ lưu lịch sử. Hộp thoại hủy giới hạn số lượng trong phần outstanding và bắt buộc lý do. Hủy không thay đổi tồn hiện có.
+Record details preserve history. Cancellation dialogs limit quantities to the outstanding balance and require a reason. Cancellation does not change on-hand stock.
 
-Ví dụ backorder độc lập: hiện có 60, khách chờ 10 ram → giao 6 → hiện có 54, khách chờ 4 → hủy 4 còn lại → hiện có vẫn 54, khách chờ 0.
+Independent backorder example: on hand 60 reams, backorder 10 → deliver 6 → on hand 54, backorder 4 → cancel the remaining 4 → on hand stays 54, backorder becomes 0.
 
-## 6. Admin: quản trị tài khoản — US14
+## 6. Admin: account administration — US14
 
-![Quản trị tài khoản](./prototype/screenshots/30-user-administration.png)
+![Account administration](./prototype/screenshots/30-user-administration.png)
 
-Admin đăng nhập vào trang quản trị tài khoản, tìm theo username/họ tên và lọc theo vai trò hoặc trạng thái. Admin không mặc định có quyền kho, đề xuất hay phê duyệt.
+Admin opens account administration, searches by username/full name and filters by role or status. Admin has no inventory, proposal or approval permissions by default.
 
-| Thao tác | Hành vi |
+| Action | Behavior |
 |---|---|
-| Tạo tài khoản | Nhập username, họ tên, một vai trò và mật khẩu tạm; tài khoản bắt đầu hoạt động và phải đổi mật khẩu |
-| Sửa tài khoản | Cập nhật họ tên, vai trò và trạng thái; username không sửa |
-| Khóa / Mở khóa | Chọn trạng thái trong form chỉnh sửa; giữ ID và toàn bộ lịch sử nghiệp vụ |
-| Cấp mật khẩu tạm | Mở hộp thoại, nhập mật khẩu tạm; các phiên trước đó hết hiệu lực và lần đăng nhập tiếp phải đổi mật khẩu |
-| Xem hoạt động | Danh sách sự kiện có người thực hiện, tài khoản liên quan và thời điểm; không hiển thị mật khẩu |
+| Create account | Enter username, full name, one role and a temporary password; the account starts active and must change its password |
+| Edit account | Update full name, role and status; the username is immutable |
+| Lock / Unlock | Select status in the edit form; preserve the ID and business history |
+| Issue temporary password | Open a dialog and enter a temporary password; earlier sessions expire and the next login requires a password change |
+| View activity | Show the actor, target account and time; never display passwords |
 
-Username cần 3–32 ký tự gồm chữ Latin, số, dấu chấm, gạch dưới hoặc gạch ngang; kiểm tra trùng không phân biệt hoa/thường. Không đăng ký công khai, không gửi email đặt lại và không xóa cứng tài khoản.
+Usernames require 3–32 Latin letters, digits, dots, underscores or hyphens. Uniqueness is case-insensitive. There is no public registration, recovery email or hard account deletion.
 
-Admin không được tự khóa hoặc tự bỏ quyền Admin; hệ thống luôn giữ ít nhất một Admin hoạt động. Người tạo và lịch sử đề xuất lưu ID cùng tên tại thời điểm thực hiện. Đổi tên/vai trò hoặc khóa tài khoản không viết lại lịch sử. Planner chỉ xem/chỉnh/gửi bản nháp thuộc tài khoản của mình; các đề xuất đã gửi được xem theo quyền nghiệp vụ.
+Admin cannot lock or demote their own account; at least one active Admin must remain. Proposal authorship and history store user IDs with name snapshots. Renaming, role changes or locking do not rewrite history. Planners can view/edit/submit only their own drafts; submitted proposals are visible according to business permissions.
 
-## 7. Kiểm chứng và giới hạn prototype
+## 7. Verification and prototype limitations
 
-Kết quả kiểm tra nằm trong [verification.json](./prototype/verification.json); script tái chạy là [verify.mjs](./prototype/verify.mjs). Bộ kiểm tra bao gồm quyền theo vai trò trong UI, tìm kiếm, nhu cầu, dữ liệu thiếu, nhận/giao từng phần, kiểm kê, hủy outstanding, tính ngân sách, trạng thái đề xuất, snapshot giá, giữ bản bị từ chối và bố cục mobile.
+Results are in [verification.json](./prototype/verification.json); rerun [verify.mjs](./prototype/verify.mjs) to check role permissions, search, demand, missing data, partial receipts/deliveries, counts, outstanding cancellations, budgets, proposal states, price snapshots, preservation of rejected originals and mobile layout.
 
-Prototype dùng HTML/CSS/JavaScript, localStorage cho dữ liệu và tài khoản, sessionStorage cho phiên theo tab. Đăng nhập, kiểm tra quyền và quản trị tài khoản được mô phỏng cục bộ; dữ liệu có thể bị chỉnh bằng công cụ trình duyệt. Chưa có backend xác thực, phân quyền bảo mật thực tế, đồng bộ nhiều người dùng hoặc tích hợp nhà cung cấp. Phép tính cục bộ chỉ minh họa nghiệp vụ; triển khai thật cần backend xác thực và tính toán. Nút kiểm tra cảnh báo hoạt động theo yêu cầu; lịch chạy hằng ngày chưa có.
+The prototype uses HTML/CSS/JavaScript, localStorage for business/account data and sessionStorage for per-tab sessions. Authentication, access checks and account administration are local simulations; browser tools can modify their data. There is no production authentication backend, secure server-side authorization, multi-user synchronization or supplier integration. Local arithmetic illustrates business rules; production requires backend verification and calculations. Manual alert checks work; daily scheduling is not implemented.
 
-Ngày tính nhu cầu được cố định để tái lập ví dụ. Dấu thời gian thao tác được ghi bằng giờ thực tế theo Asia/Ho_Chi_Minh. Các ảnh là trạng thái độc lập được đặt lại fixture, không phải một chuỗi giao dịch liên tục; nên dùng **Đặt lại mẫu** trước khi thử từng ví dụ.
+The demand calculation date is fixed for reproducible examples. Action timestamps use real time in Asia/Ho_Chi_Minh. Screenshots are independent fixture states, not a continuous transaction sequence. Use **Reset sample data** before trying each example.

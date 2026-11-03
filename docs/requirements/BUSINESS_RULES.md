@@ -1,6 +1,6 @@
 # StockMate — Business Rules
 
-These are the decisions agreed for the project. The [README](../README.md) remains the main project outline.
+These are the decisions agreed for the project. The [README](../../README.md) remains the main project outline.
 
 ## 1. Replenishment Trigger and Demand Period
 

@@ -150,4 +150,4 @@ Automatic supplier integration, payments/accounting, shared budget funds, multip
 
 Login, logout, password change and User Administration are included. Temporary passwords require a change before entering the workspace. Access Denied and Not Found are supporting pages. Locked accounts cannot log in; username is immutable. Preserve historical users, prevent self-lock/self-demotion, and retain at least one active Admin.
 
-See [Project Requirements](../../README.md) and [Business Rules](../BUSINESS_RULES.md).
+See [Project Requirements](../../README.md) and [Business Rules](../requirements/BUSINESS_RULES.md).

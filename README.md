@@ -418,7 +418,7 @@ Accuracy, role-based permissions and change history are required. Core forms mus
 
 **Outside the MVP:** automatic supplier integration, payments/accounting, shared budget funds and multiple warehouses. Detailed technical mechanisms are implementation choices, not additional business requirements.
 
-The agreed decisions are summarized in [Business Rules](./docs/BUSINESS_RULES.md).
+The agreed decisions are summarized in [Business Rules](./docs/requirements/BUSINESS_RULES.md).
 
 ## 5. Information Architecture
 
@@ -426,7 +426,13 @@ See [Information Architecture](./docs/information_architecture/INFORMATION_ARCHI
 
 ## 6. UI/UX
 
+### 6.1. Walkthrough
+
 See [UI/UX Walkthrough](./docs/ui_ux/UI_UX_WALKTHROUGH.md) for role journeys, account access, screen actions and feedback. The local HTML/CSS/JavaScript prototype includes four demo accounts and account administration.
+
+### 6.2. Screen Catalog
+
+Browse [all prototype screens by role](./docs/ui_ux/prototype/screenshots/SCREENSHOT_INDEX.md): [Common screens](./docs/ui_ux/prototype/screenshots/common/COMMON_SCREENS.md) · [Admin](./docs/ui_ux/prototype/screenshots/admin/ADMIN_SCREENS.md) · [Warehouse Staff](./docs/ui_ux/prototype/screenshots/warehouse_staff/WAREHOUSE_STAFF_SCREENS.md) · [Inventory Planner](./docs/ui_ux/prototype/screenshots/planner/PLANNER_SCREENS.md) · [Manager](./docs/ui_ux/prototype/screenshots/manager/MANAGER_SCREENS.md). Images are numbered by functional flow within each folder. Shared screens are stored in `common`; role catalogs cover pages, forms, dialogs and key states. The walkthrough keeps its 10 representative images.
 
 ## 7. Database Design
 
@@ -434,8 +440,8 @@ See [Database Design](./docs/database/DATABASE_DESIGN.md) for the tables, ER dia
 
 ## 8. API Specification
 
-See [API Overview](./docs/api/README.md), [OpenAPI YAML](./docs/api/openapi.yaml) or [OpenAPI JSON](./docs/api/openapi.json). The API files are technical drafts; they do not add business scope beyond this README.
+See [API Overview](./docs/openapi/README.md), [OpenAPI YAML](./docs/openapi/openapi.yaml) or [OpenAPI JSON](./docs/openapi/openapi.json). The API files are technical drafts; they do not add business scope beyond this README.
 
 ## 9. C4 Architecture
 
-See [C4 Architecture](./docs/c4_architecture/C4_ARCHITECTURE.md) for the proposed system context, containers, backend components, existing prototype code mapping and key interaction flows. The document distinguishes implemented prototype modules from the backend, database and AI integration that remain to be built.
+See [C4 Architecture](./docs/c4_architecture/C4_ARCHITECTURE.md) for the proposed C1 system context, C2 containers and C3 backend components, including technology labels and pending stack decisions. The document distinguishes implemented prototype modules from the backend, database and AI integration that remain to be built.
