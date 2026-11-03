@@ -426,13 +426,7 @@ See [Information Architecture](./docs/information_architecture/INFORMATION_ARCHI
 
 ## 6. UI/UX
 
-### 6.1. Walkthrough
-
-See [UI/UX Walkthrough](./docs/ui_ux/UI_UX_WALKTHROUGH.md) for role journeys, account access, screen actions and feedback. The local HTML/CSS/JavaScript prototype includes four demo accounts and account administration.
-
-### 6.2. Screen Catalog
-
-Browse [all prototype screens by role](./docs/ui_ux/prototype/screenshots/SCREENSHOT_INDEX.md): [Common screens](./docs/ui_ux/prototype/screenshots/common/COMMON_SCREENS.md) · [Admin](./docs/ui_ux/prototype/screenshots/admin/ADMIN_SCREENS.md) · [Warehouse Staff](./docs/ui_ux/prototype/screenshots/warehouse_staff/WAREHOUSE_STAFF_SCREENS.md) · [Inventory Planner](./docs/ui_ux/prototype/screenshots/planner/PLANNER_SCREENS.md) · [Manager](./docs/ui_ux/prototype/screenshots/manager/MANAGER_SCREENS.md). Images are numbered by functional flow within each folder. Shared screens are stored in `common`; role catalogs cover pages, forms, dialogs and key states. The walkthrough keeps its 10 representative images.
+See [UI/UX Walkthrough](./docs/ui_ux/UI_UX_WALKTHROUGH.md) for role journeys, account access, screen actions, feedback and the screen catalog by role.
 
 ## 7. Database Design
 

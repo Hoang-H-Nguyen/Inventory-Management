@@ -4,7 +4,7 @@ This document describes the current web prototype for US01–US14, aligned with 
 
 StockMate demonstrates Inventory Position tracking, proposals with multiple products and suppliers, individual proposal budgets, AI-assisted drafts and outstanding records. The walkthrough uses 10 representative screenshots. Documentation is in English; the prototype interface and screenshots remain in Vietnamese. English action names below describe the corresponding controls in those screenshots.
 
-### Screen catalog by function and role
+## Screen catalog by function and role
 
 Browse the [complete screen catalog](./prototype/screenshots/SCREENSHOT_INDEX.md): [Common](./prototype/screenshots/common/COMMON_SCREENS.md) · [Admin](./prototype/screenshots/admin/ADMIN_SCREENS.md) · [Warehouse Staff](./prototype/screenshots/warehouse_staff/WAREHOUSE_STAFF_SCREENS.md) · [Planner](./prototype/screenshots/planner/PLANNER_SCREENS.md) · [Manager](./prototype/screenshots/manager/MANAGER_SCREENS.md). Images are numbered by functional flow. Shared screens are in `common`; warehouse staff screens are in `warehouse_staff`. Catalogs cover pages, forms, dialogs and key states; the 10 illustrations below are retained.
 
