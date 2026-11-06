@@ -439,3 +439,7 @@ See [API Overview](./docs/openapi/README.md), [OpenAPI YAML](./docs/openapi/open
 ## 9. C4 Architecture
 
 See [C4 Architecture](./docs/c4_architecture/C4_ARCHITECTURE.md) for the proposed C1 system context, C2 containers and C3 backend components, including technology labels and pending stack decisions. The document distinguishes implemented prototype modules from the backend, database and AI integration that remain to be built.
+
+## 10. Code Structure
+
+See [Code Structure](./docs/code-structure/README.md) for the source directory tree and file responsibilities. The starter source is in [`src/`](./src/README.md).

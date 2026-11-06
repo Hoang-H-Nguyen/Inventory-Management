@@ -1,0 +1,538 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/v1/me",
+    "operation_id": "getMe",
+    "module": "auth",
+    "roles": [
+      "ADMIN",
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER",
+      "MANAGER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/products",
+    "operation_id": "listProducts",
+    "module": "catalog",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/products",
+    "operation_id": "createProduct",
+    "module": "catalog",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/products/{productId}",
+    "operation_id": "getProduct",
+    "module": "catalog",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/v1/products/{productId}",
+    "operation_id": "updateProduct",
+    "module": "catalog",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/suppliers",
+    "operation_id": "listSuppliers",
+    "module": "catalog",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/suppliers",
+    "operation_id": "createSupplier",
+    "module": "catalog",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/v1/suppliers/{supplierId}",
+    "operation_id": "updateSupplier",
+    "module": "catalog",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/products/{productId}/suppliers",
+    "operation_id": "listSupplierProducts",
+    "module": "catalog",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/products/{productId}/suppliers",
+    "operation_id": "createSupplierProduct",
+    "module": "catalog",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/v1/supplier-products/{supplierProductId}",
+    "operation_id": "updateSupplierProduct",
+    "module": "catalog",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "PUT",
+    "path": "/api/v1/products/{productId}/policy",
+    "operation_id": "setPolicy",
+    "module": "catalog",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/inventory",
+    "operation_id": "listInventory",
+    "module": "inventory",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/inventory/{productId}",
+    "operation_id": "getInventory",
+    "module": "inventory",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/inventory/{productId}/movements",
+    "operation_id": "listMovements",
+    "module": "inventory",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/inventory/{productId}/counts",
+    "operation_id": "recordCount",
+    "module": "inventory",
+    "roles": [
+      "WAREHOUSE_STAFF"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/inventory/{productId}/sales",
+    "operation_id": "recordSale",
+    "module": "inventory",
+    "roles": [
+      "WAREHOUSE_STAFF"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/placed-orders",
+    "operation_id": "listPlacedOrders",
+    "module": "orders",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/placed-orders",
+    "operation_id": "createPlacedOrder",
+    "module": "orders",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/placed-orders/{orderId}",
+    "operation_id": "getPlacedOrder",
+    "module": "orders",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/placed-orders/{orderId}/receipts",
+    "operation_id": "receiveOrder",
+    "module": "orders",
+    "roles": [
+      "WAREHOUSE_STAFF"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/placed-orders/{orderId}/cancellations",
+    "operation_id": "cancelOrderRemainder",
+    "module": "orders",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/placed-orders/{orderId}/history",
+    "operation_id": "listOrderHistory",
+    "module": "orders",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/backorders",
+    "operation_id": "listBackorders",
+    "module": "backorders",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/backorders",
+    "operation_id": "createBackorder",
+    "module": "backorders",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/backorders/{backorderId}",
+    "operation_id": "getBackorder",
+    "module": "backorders",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/backorders/{backorderId}/fulfilments",
+    "operation_id": "fulfilBackorder",
+    "module": "backorders",
+    "roles": [
+      "WAREHOUSE_STAFF"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/backorders/{backorderId}/cancellations",
+    "operation_id": "cancelBackorder",
+    "module": "backorders",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/backorders/{backorderId}/history",
+    "operation_id": "listBackorderHistory",
+    "module": "backorders",
+    "roles": [
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/products/{productId}/sales",
+    "operation_id": "listSales",
+    "module": "demand",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/products/{productId}/demand",
+    "operation_id": "getDemand",
+    "module": "demand",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/low-stock",
+    "operation_id": "listLowStock",
+    "module": "replenishment",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/low-stock/{productId}",
+    "operation_id": "getLowStockDetail",
+    "module": "replenishment",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/replenishment-runs",
+    "operation_id": "listRuns",
+    "module": "replenishment",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/replenishment-runs",
+    "operation_id": "createManualRun",
+    "module": "replenishment",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/dashboard",
+    "operation_id": "getDashboard",
+    "module": "dashboard",
+    "roles": [
+      "MANAGER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/proposals/preview",
+    "operation_id": "previewProposal",
+    "module": "proposals",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/proposals",
+    "operation_id": "listProposals",
+    "module": "proposals",
+    "roles": [
+      "INVENTORY_PLANNER",
+      "MANAGER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/proposals",
+    "operation_id": "createDraft",
+    "module": "proposals",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/proposals/{proposalId}",
+    "operation_id": "getProposal",
+    "module": "proposals",
+    "roles": [
+      "INVENTORY_PLANNER",
+      "MANAGER"
+    ]
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/v1/proposals/{proposalId}",
+    "operation_id": "updateDraft",
+    "module": "proposals",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/proposals/{proposalId}/submit",
+    "operation_id": "submitProposal",
+    "module": "proposals",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/proposals/{proposalId}/approve",
+    "operation_id": "approveProposal",
+    "module": "proposals",
+    "roles": [
+      "MANAGER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/proposals/{proposalId}/reject",
+    "operation_id": "rejectProposal",
+    "module": "proposals",
+    "roles": [
+      "MANAGER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/proposals/{proposalId}/copy",
+    "operation_id": "copyRejectedProposal",
+    "module": "proposals",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/proposals/{proposalId}/history",
+    "operation_id": "listProposalHistory",
+    "module": "proposals",
+    "roles": [
+      "INVENTORY_PLANNER",
+      "MANAGER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/ai/draft-requests",
+    "operation_id": "createAIDraftRequest",
+    "module": "ai",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/ai/draft-requests/{requestId}",
+    "operation_id": "getAIRequest",
+    "module": "ai",
+    "roles": [
+      "INVENTORY_PLANNER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/auth/login",
+    "operation_id": "login",
+    "module": "auth",
+    "roles": [
+      "PUBLIC"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/auth/logout",
+    "operation_id": "logout",
+    "module": "auth",
+    "roles": [
+      "ADMIN",
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER",
+      "MANAGER"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/auth/change-password",
+    "operation_id": "changePassword",
+    "module": "auth",
+    "roles": [
+      "ADMIN",
+      "WAREHOUSE_STAFF",
+      "INVENTORY_PLANNER",
+      "MANAGER"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/users",
+    "operation_id": "listUsers",
+    "module": "users",
+    "roles": [
+      "ADMIN"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/users",
+    "operation_id": "createUser",
+    "module": "users",
+    "roles": [
+      "ADMIN"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/users/{userId}",
+    "operation_id": "getUser",
+    "module": "users",
+    "roles": [
+      "ADMIN"
+    ]
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/v1/users/{userId}",
+    "operation_id": "updateUser",
+    "module": "users",
+    "roles": [
+      "ADMIN"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/users/{userId}/reset-password",
+    "operation_id": "resetUserPassword",
+    "module": "users",
+    "roles": [
+      "ADMIN"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/user-activity",
+    "operation_id": "listUserActivity",
+    "module": "users",
+    "roles": [
+      "ADMIN"
+    ]
+  }
+]
